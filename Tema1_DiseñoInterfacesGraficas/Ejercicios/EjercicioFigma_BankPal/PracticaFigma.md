@@ -24,9 +24,47 @@ El proyecto de Figma debe tener:
 Se ha realizado un **wireframe** sobre una aplicaciónn de banco, inspirado en el diseño del ejercicio de <a href="https://github.com/estelaV9/PMDM/tree/master/introduccion">cuentas bancarias</a> 
 del módulo de **PMDM**.
 
-### Vistas
+### Visión General del Proyecto
+#### Introducción
+<table>
+  <tr>
+    <td width="45%">
+        Al abrir el proyecto, aparecerá una introducción de tres páginas sobre la aplicación <b>BankPal</b>. <br><br>
+      Después de deslizar la intruducción, mostrará la introducción principal donde redirigira al usuario a la aplicación pulsando el botón <b>START</b>.
+    </td>
+    <td width="55%">
+      <img src="myFiles/intro/beginning.png" width="100"> 
+      <img src="myFiles/intro/beginning2.png" width="100"> 
+      <img src="myFiles/intro/beginning3.png" width="100"> 
+      <img src="myFiles/intro/start.png" width="100"> 
+    </td>            
+ </tr>
+</table>
+
+#### Página Principal
 
 
+#### Página de Categorías
+
+#### Página de Transferencias
+
+#### Página de Tarjetas
+
+#### Página de Pefil
+
+#### Menú
+<table>
+  <tr>
+    <td width="70%">
+        Al pulsar el botón de <b>tres rayas</b> nos llevará al menú. <br><br>
+      En él, podremos <b>activar notificaciones</b>, <b>hacer un backup</b>, <b>cerrar la sesión</b>, <b>ir al perfil</b> e <b>ir a mi GitHub</b>
+    </td>
+    <td width="30%">
+      <img src="myFiles/menu/menu.png" width="100"> 
+      <img src="myFiles/menu/menuWithLanguages.png" width="100"> 
+    </td>            
+ </tr>
+</table>
 
 
 
