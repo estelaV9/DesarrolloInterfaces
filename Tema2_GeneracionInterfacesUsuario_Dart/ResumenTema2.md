@@ -250,6 +250,14 @@ Se pueden almancenar múltiples valores con varios tipos de colecciones:
 ```dart
  List<int> numeros = [1, 2, 3];
 ```
+  - `Añadir` un elemento:
+    ```dart
+     numeros.add(4);
+    ```
+  - `Borrar` un elemento determinado:
+    ```dart
+     numeros.remove(2);
+    ```
 
 - `Set`: para una colección sin duplicados.
 ```dart
@@ -260,8 +268,120 @@ Set<int> unicos = {1, 2, 3};
 ```dart
 Map<String, int> edad = {'Ana': 25, 'Juan': 30};
 ```
+Podemos acceder al valor asociado a un clase:
+```dart
+print(edades['Ana']); // Salida: 25
+```
+Y **agregar** o **eliminar** pares:
+```dart
+edades['Luis'] = 28;  // Añadir
+edades.remove('Juan'); // Eliminar
+```
+
+### Programación asíncrona
+Dart permite manejar tareas asíncronas mediante el uso de:
+- `Future`: representa el valor o error que devolverá en el futuro.
+- `async`: definir una función asíncrona. La función no se ejecuta de inmediato, sino que devuelve un Future que será completado más tarde.
+- `await`: se utiliza para esperar a que un **Future** complete su ejecución antes de continuar.
+
+Por ejemplo:
+```dart
+import 'dart:async';  // NECESARIO PARA USAR FUTURE
+
+// FUNCION QUE SIMULA PEDIR UNA PIZZA (tarda 3 segundos)
+Future<String> pedirPizza() async {
+  print('Pidiendo pizza...');
+  await Future.delayed(Duration(seconds: 3)); // ESPERAR 3 SEGUNDOS
+  return '¡Pizza entregada!';  // AL FINAL, LA PIZZA LLEGA
+}
+
+void main() async {
+  print('Tengo hambre...');
+  
+  // LLAMAR A LA FUNCION pedirPizza Y ESPERAR QUE SE COMPLETE
+  String resultado = await pedirPizza();
+  
+  // SOLO DESPUES DE ESPERAR MOSTRAMOS EL RESULTADO
+  print(resultado);
+  print('¡A comer!');
+}
+
+```
 
 
+### Streams
+Un `Stream` es una secuencia de eventos **asincrónicos**, los cuales se utilizan para manejar situaciones donde haya muchos datos que necesitan ser procesados a medida que se generan (clicks, toques,...)
+El método `listen()` es una función que se utiliza en un Stream para "**escuchar**" los datos que el Stream emite en el tiempo. Permite reaccionar a cada valor que el Stream produce, una vez esté disponible. <br>
+
+Con `listen()` se puede definir un `callback` para procesar cada dato que se emite. <br>
+
+Además, se puede definir acciones a ejecutar cuando ocurra un error (`onError`) o cuando el Stream termine (`onDone`). <br> Por ejemplo:
+
+```dart
+void main() {
+  // CREAMOS UN STREAM QUE EMITE NUMEROS DEL 1 AL 3 CON UNA PAUSA ENTRE CADA UNO
+  Stream<int> numeros = Stream.periodic(Duration(seconds: 1), (x) => x + 1).take(3);
+
+  // USAMOS listen() PARA ESCUCHAR LOS DATOS QUE EMITE EL Stream
+  numeros.listen((data) {
+      print('Recibido: $data');  // SE EJECUTA CADA VEZ QUE LLEGA UN DATO
+    },
+    onError: (error) {
+      print('Error: $error');  // SE EJECUTA SI OCURRE UN ERROR
+    },
+    onDone: () {
+      print('Stream terminado');  // SE EJECUTA CUANTO EL Stream FINALIZA
+    }
+  );
+}
+```
+
+Otro ejemplo: Leer un archivo línea por línea usando el método `openRead()`.
+```dart
+// transform CONVIERTE BYTES A TEXTO Y LUEGO DIVIDE EL CONTENIDO EN LINEAS
+Stream<String> lineas =
+      archivo.openRead().transform(utf8.decoder).transform(LineSplitter()); 
+
+lineas.listen((linea) { 
+  print('Procesando línea: $linea'); // IMPRIME LA LINEA
+  }, 
+  onError: (e) => print('Ocurrió un error: $e'), 
+  onDone: () => print('Lectura del archivo completa.'), 
+  );
+}
+```
+
+### Librerías 
+- `dart:core`: Incorpora todas las funciones esenciales que se necesita para crear aplicaciones.
+- `dart:math`: librería para cálculos.
+- `dart:async`,`dart:io`,`dart:convert`,...
+
+
+### Esquema básico de un proyecto
+Archivos principales:
+- `main.dart`.
+
+Carpetas comunes:
+- `lib/`: contiene el código fuente principal (clases y funciones).
+- `test/`: Incluye los archivos de prueba.
+- `bin/`: scripts ejecutables.
+- `web/`: archivos para la ejecución web del proyecto.
+
+Archivos configuración:
+- `pubspec.yaml`: archivo de configuración para gestionar las dependencias del proyecto.
+- `.gitignore`: define qué archivos ignorar para el control de versiones.
+
+Comandos básicos:
+- `dart run`: ejecuta el proyecto.
+- `dart test`: corre las pruebas unitarias.
+
+#### Archivo pubspec.yaml
+- `name` and `description`.
+- `version`.
+- `environment`: versión SDK.
+- `dependencies`.
+- `dev_dependencies`.
+- `flutter`: opciones de flutter.
 
 
 
