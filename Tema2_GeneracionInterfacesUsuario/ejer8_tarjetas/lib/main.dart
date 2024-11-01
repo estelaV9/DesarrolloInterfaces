@@ -12,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,63 +26,82 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(title),
+      ),
+      body: Center(
+          child: Container(
+        width: 600.0, // ANCHO DEL CONTENEDOR DONDE IRA EL GRIDVIEW
+        height: 600.0, // ALTURA DEL CONTENEDOR DONDE IRA EL GRIDVIEW
+        child: GridView.count(
+          crossAxisCount: 2, // DOS COLUMNAS EN EL GRID
+          crossAxisSpacing: 10.0, // MARGEN HORIZONTAL ENTRE TARJETAS
+          mainAxisSpacing: 10.0, // MARGEN VERTICAL ENTRE TARJETAS
+          children: const [
+            // SE LLAMA A LA CLASE TarjetaPersonalizada QUE DEVOLVERA UNA TARJETA
+            TarjetaPersonalizada(
+                titulo: "TEXTO 1",
+                urlImagen:
+                    "https://img.freepik.com/foto-gratis/gato-futurista-gafas-proteccion_23-2150969319.jpg?semt=ais_hybrid"),
+            TarjetaPersonalizada(
+                titulo: "TEXTO 2",
+                urlImagen:
+                    "https://img.freepik.com/foto-gratis/gato-futurista-gafas-proteccion_23-2150969319.jpg?semt=ais_hybrid"),
+            TarjetaPersonalizada(
+                titulo: "TEXTO 3",
+                urlImagen:
+                    "https://img.freepik.com/foto-gratis/gato-futurista-gafas-proteccion_23-2150969319.jpg?semt=ais_hybrid"),
+            TarjetaPersonalizada(
+                titulo: "TEXTO 4",
+                urlImagen:
+                    "https://img.freepik.com/foto-gratis/gato-futurista-gafas-proteccion_23-2150969319.jpg?semt=ais_hybrid"),
+          ],
         ),
-        body: Center(
-            // CONTENEDOR PARA METER EL GRIDVIEW
-            child: Container(
-                width: 600.0, // ANCHO DEL GRIDVIEW
-                height: 600.0, // ALTURA DEL GRIDVIEW
-                child: GridView.count(
-                    crossAxisCount: 2,
-                    // COLUMNAS
-                    crossAxisSpacing: 10.0,
-                    // MARGEN HORIZONTAL ENTRE LAS COLUMNAS
-                    mainAxisSpacing: 10.0,
-                    // MARGEN VERTICAL ENTRE LAS COLUMNAS
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.purple,width: 4),
-                          boxShadow: const [
-                            BoxShadow(
-                              blurRadius: (10),
-                              color: Colors.purple
-                            )
-                          ]
-                        ),
-                          child: Center(
-                              child: Column(children: [
-                            const Text("TEXTO 1",
-                                style: TextStyle(fontSize: 24)),
+      )),
+    );
+  }
+}
 
-                            const Padding(padding: EdgeInsets.all(10)),
+class TarjetaPersonalizada extends StatelessWidget {
+  final String titulo; // TITULO DE LA TARJETA
+  final String urlImagen; // URL DE LA IMAGEN
 
-                            Image.network(
-                              "https://img.freepik.com/foto-gratis/gato-futurista-gafas-proteccion_23-2150969319.jpg?semt=ais_hybrid",
-                              width: 200,
-                              height: 200,
-                            )
-                          ]))),
-                      Container(color: Colors.blue, child: Text('2')),
-                      Container(color: Colors.green, child: Text('3')),
-                    ]))));
+  const TarjetaPersonalizada(
+      {super.key, required this.titulo, required this.urlImagen});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        // DEVUELVE UN CARD
+        child: Container(
+            // CONTENEDOR DE LO QUE TENDRA LA TARJETA
+            decoration: BoxDecoration(
+                // DECORACION DEL CONTEINER
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.black, width: 2),
+                boxShadow: const [
+                  BoxShadow(blurRadius: (10), color: Colors.black)
+                ]),
+
+            child: Center(
+                child: Column(children: [
+              Text(titulo, style: const TextStyle(fontSize: 24)),
+              const Padding(padding: EdgeInsets.all(10)),
+              Image.network(
+                urlImagen,
+                width: 200,
+                height: 200,
+              ),
+            ]))));
   }
 }
