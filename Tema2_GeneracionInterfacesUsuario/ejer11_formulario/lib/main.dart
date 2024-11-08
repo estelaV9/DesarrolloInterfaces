@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /* EJERCICIO 11: Crea un formulario de registro que tenga TextFields para nombre, correo
 electrónico y contraseña. Usa el widget Form para gestionar la validación, y
 añade un botón para enviar el formulario */
+
 void main() {
   runApp(const MyApp());
 }
@@ -38,40 +39,29 @@ class _RegistrationFormState extends State<FormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Center(
-          child: Text('Formulario de Registro',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-        )
-      ),
+          backgroundColor: Theme
+              .of(context)
+              .colorScheme
+              .inversePrimary,
+          title: const Center(
+            child: Text(
+              'Formulario de Registro',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+          )),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(24.0),
         child: Form(
           child: Column(
             children: <Widget>[
               // CAMPO NOMBRE
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'Nombre'),
-                style: TextStyle(fontSize: 24),
-              ),
-              SizedBox(height: 10),
+              const TextFieldGenerator(nombreCampo: 'Nombre',),
 
               // CAMPO CORREO ELECTRONICO
-              TextFormField(
-                decoration:
-                    const InputDecoration(labelText: 'Correo electrónico'),
-                style: TextStyle(fontSize: 24),
-              ),
-              SizedBox(height: 10),
+              const TextFieldGenerator(nombreCampo: 'Correo electrónico',),
 
               // CAMPO DE CONTRASEÑA
-              TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(labelText: 'Contraseña'),
-                style: TextStyle(fontSize: 24),
-              ),
-              SizedBox(height: 20),
+              const TextFieldGenerator(nombreCampo: 'Contraseña',),
 
               // BOTON ENVIAR
               ElevatedButton(
@@ -80,7 +70,7 @@ class _RegistrationFormState extends State<FormPage> {
                     SnackBar(content: Text('Formulario Enviado')),
                   );
                 },
-                child: const Text(
+                child: Text(
                   'Registrar',
                   style: TextStyle(fontSize: 24),
                 ),
@@ -89,6 +79,25 @@ class _RegistrationFormState extends State<FormPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class TextFieldGenerator extends StatelessWidget {
+  final String nombreCampo;
+
+  const TextFieldGenerator(
+      {super.key, required this.nombreCampo}); // ATRIBUTO PARA CUARDAR LOS NOMBRES DE LOS CAMPOS
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextFormField(
+          decoration: InputDecoration(labelText: nombreCampo),
+          style: const TextStyle(fontSize: 24),),
+        const SizedBox(height: 10),
+      ],
     );
   }
 }
