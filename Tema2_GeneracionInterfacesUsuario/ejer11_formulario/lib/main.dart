@@ -11,7 +11,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,14 +34,14 @@ class FormPage extends StatefulWidget {
 }
 
 class _RegistrationFormState extends State<FormPage> {
+  // CLAVE GLOBAL PARA EL FORM
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Theme
-              .of(context)
-              .colorScheme
-              .inversePrimary,
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: const Center(
             child: Text(
               'Formulario de Registro',
@@ -52,25 +51,45 @@ class _RegistrationFormState extends State<FormPage> {
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Form(
+          key: _formKey, // ASIGNAR LA CLAVE GLOBAL AL FORM
           child: Column(
             children: <Widget>[
               // CAMPO NOMBRE
-              const TextFieldGenerator(nombreCampo: 'Nombre',),
+              const TextFieldGenerator(
+                nombreCampo: 'Nombre',
+                numValidacion: 1,
+              ),
 
               // CAMPO CORREO ELECTRONICO
-              const TextFieldGenerator(nombreCampo: 'Correo electrónico',),
+              const TextFieldGenerator(
+                nombreCampo: 'Correo electrónico',
+                numValidacion: 2, // Validación para correo electrónico
+              ),
 
               // CAMPO DE CONTRASEÑA
-              const TextFieldGenerator(nombreCampo: 'Contraseña',),
+              const TextFieldGenerator(
+                nombreCampo: 'Contraseña',
+                numValidacion: 3, // Validación para contraseña
+              ),
 
               // BOTON ENVIAR
               ElevatedButton(
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Formulario Enviado')),
-                  );
+                  if (_formKey.currentState?.validate() ?? false) {
+                    // SI ES VALIDO, MOSTRAMOS UN MENSAKE
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Formulario Enviado')),
+                    );
+                  } else {
+                    // SI LA VALIDACION FALLA, MOSTRAMOS UN MENSAJE
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text(
+                              'Por favor, complete el formulario correctamente')),
+                    );
+                  }
                 },
-                child: Text(
+                child: const Text(
                   'Registrar',
                   style: TextStyle(fontSize: 24),
                 ),
@@ -85,9 +104,13 @@ class _RegistrationFormState extends State<FormPage> {
 
 class TextFieldGenerator extends StatelessWidget {
   final String nombreCampo;
+  final int numValidacion;
 
-  const TextFieldGenerator(
-      {super.key, required this.nombreCampo}); // ATRIBUTO PARA CUARDAR LOS NOMBRES DE LOS CAMPOS
+  const TextFieldGenerator({
+    super.key,
+    required this.nombreCampo,
+    required this.numValidacion,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +118,40 @@ class TextFieldGenerator extends StatelessWidget {
       children: [
         TextFormField(
           decoration: InputDecoration(labelText: nombreCampo),
-          style: const TextStyle(fontSize: 24),),
+          style: const TextStyle(fontSize: 24),
+          validator: (value) {
+            switch (numValidacion) {
+              case 1: // VALIDACIÓN PARA QUE EL CAMPO NO ESTÉ VACÍO (NOMBRE)
+                if (value == null || value.isEmpty) {
+                  return 'Este campo no puede estar vacío';
+                }
+                break;
+              case 2: // VALIDACIÓN PARA EL CORREO ELECTRÓNICO
+                if (value == null || value.isEmpty) {
+                  return 'Por favor ingresa un correo electrónico';
+                }
+                // Expresión regular para verificar formato de correo electrónico
+                if (!RegExp(
+                        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$')
+                    .hasMatch(value)) {
+                  return 'Por favor ingresa un correo válido';
+                }
+                break;
+              case 3: // VALIDACIÓN PARA LA CONTRASEÑA
+                if (value == null || value.isEmpty) {
+                  return 'Por favor ingresa una contraseña';
+                }
+                // Validación de contraseña: al menos 6 caracteres
+                if (value.length < 6) {
+                  return 'La contraseña debe tener al menos 6 caracteres';
+                }
+                break;
+              default:
+                return null; // Si no hay un tipo de validación definido
+            }
+            return null; // Si todo es válido
+          },
+        ),
         const SizedBox(height: 10),
       ],
     );
