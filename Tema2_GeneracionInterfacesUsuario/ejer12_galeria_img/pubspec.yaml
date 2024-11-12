@@ -52,6 +52,12 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+    - assets/frontalPhotoShrek.jpeg
+    - assets/gato1.jpg
+    - assets/homer.jpg
+    - assets/Michis.jpg
+    - assets/shrekPhoto.jpg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
