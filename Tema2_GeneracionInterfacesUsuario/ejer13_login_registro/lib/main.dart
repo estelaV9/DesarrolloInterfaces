@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+/*EJERCICIO 13: Diseña una pantalla de bienvenida con un texto, una breve descripción
+y botones de Login y Registro. Usa “SingleChildScrollView” para hacerla
+desplazable en caso de que tengamos pantallas pequeñas. Añade mucho
+texto para comprobarlo*/
+
 void main() {
   runApp(const MyApp());
 }
