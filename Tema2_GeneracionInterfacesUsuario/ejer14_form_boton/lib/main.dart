@@ -141,6 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                         TextFormField(
                           controller: _passwordController,
+                          obscureText: true, // HACE QUE LAS PALABRAS SE CONVIERTAN EN PUNTOS
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: "Contraseña",
