@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/*Implementa un StatefulWidget que incremente el contador
+al presionar el botón. ¿Se podría hacer con un StatelessWidget?*/
+
 void main() {
   runApp(const MyApp());
 }
@@ -10,26 +13,34 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // QUITAR MARCA DEBUG
-      title: 'Flutter Demo',
-      home: MyStatefulWidget(),
+      title: "Ejercicio 3",
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const CounterPage(title: "Ejercicio 3"),
     );
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
+class CounterPage extends StatefulWidget {
+  final String title;
+
+  const CounterPage({super.key, required this.title});
+
   @override
-  _MyStatefulWidgetState createState() =>
-      _MyStatefulWidgetState();
+  State<CounterPage> createState() => _CounterState();
 }
 
+// CREAMOS UNA CLASE QUE EXTIENDE DEL ESTADO DE LA CLASE "CounterPage"
+class _CounterState extends State<CounterPage> {
+  final TextStyle textStyle = const TextStyle(fontSize: 24);
+  int counter = 0; // ATRIBUTO CONTADOR INICIALIZADO EN 0
 
-// CREAMOS UNA CLASE QUE EXTIENDE DEL ESTADO DE LA CLASE "MyStatefulWidget"
-class _MyStatefulWidgetState extends State<MyStatefulWidget>{
-  int contador = 0; // ATRIBUTO CONTADOR INICIALIZADO EN 0
-  void incrementarContador(){
+  void onCounterAction() {
     setState(() {
-      contador++; // INCREMENTAMOS EL CONTADOR
+      counter++; // INCREMENTAMOS EL CONTADOR
     }); // SETEAMOS EL ESTADO
   } // METODO PARA INCREMENTAR EL CONTADOR
 
@@ -37,27 +48,37 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ejercicio 3 Página 31"),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(
+          widget.title,
+          style: textStyle,
+        ),
       ),
-
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // CENTRA LA COLUMNA
+          // PONERLO EN EL CENTRO
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(contador.toString(), style: TextStyle(fontSize: 24)), // TEXTO CON EL VALOR DEL CONTADOR
+            Text(
+              counter.toString(), // TEXTO CON VALOR DEL CONTADOR
+              style: textStyle,
+            ),
 
-            // AÑADIR UN MARGEN ENTRE EL TEXTO Y EL BOTON DE 20
-            const Padding(padding: EdgeInsets.only(
-              top: 20,
-              bottom: 20,
-            ),),
+            // AÑADIR UN ESPACIO ENTRE EL TEXTO Y EL BOTON DE 10
+            const SizedBox(
+              height: 10,
+            ),
 
             ElevatedButton(
-                onPressed: (){
+                onPressed: () {
                   // SE LLAMA A LA FUNCION INCREMENTAR CUANDO SE PULSA EL BOTON
-                  incrementarContador();
-                }, child: (Text("Incrementar", style: TextStyle(fontSize: 24)))
-            )
+                  onCounterAction();
+                },
+                child: Text(
+                  "Pulsar",
+                  style: textStyle,
+                ))
           ],
         ),
       ),
