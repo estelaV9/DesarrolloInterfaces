@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-/*EJERCICIO 15: .Diseña una pantalla de perfil de usuario usando Stack para mostrar
+/*EJERCICIO 15: Diseña una pantalla de perfil de usuario usando Stack para mostrar
 una imagen de portada (fondo), un avatar redondeado superpuesto a la izquierda,
 y el nombre del usuario a la derecha.
 1. Añade un formulario debajo que permita editar los textos, guardarlos y que
@@ -16,24 +16,25 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Ejercicio 15 Pagina 52',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Ejercicio 15 Pagina 52'),
+      home: const PaginaPantalla(title: 'Ejercicio 15 Pagina 52'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class PaginaPantalla extends StatefulWidget {
+  const PaginaPantalla({super.key, required this.title});
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<PaginaPantalla> createState() => _StatePaginaPantalla();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _StatePaginaPantalla extends State<PaginaPantalla> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
