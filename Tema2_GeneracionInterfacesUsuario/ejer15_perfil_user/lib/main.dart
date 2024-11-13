@@ -36,6 +36,9 @@ class PaginaPantalla extends StatefulWidget {
 }
 
 class _StatePaginaPantalla extends State<PaginaPantalla> {
+  String nombre = "";
+  final _nameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,80 +51,140 @@ class _StatePaginaPantalla extends State<PaginaPantalla> {
       ),
       body: Center(
         child: Container(
-            width: 600,
-            height: 700,
-            decoration: BoxDecoration(
-                color: Colors.deepPurpleAccent[100],
-                border: Border.all(color: Colors.black38, width: 5),
-                borderRadius: BorderRadius.circular(20)),
-            child: Padding(
+          width: 600,
+          height: 600,
+          decoration: BoxDecoration(
+              color: Colors.deepPurpleAccent[100],
+              border: Border.all(color: Colors.black38, width: 5),
+              borderRadius: BorderRadius.circular(20)),
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(children: [
+              const Text(
+                "Perfil de Usuario",
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic),
+              ),
+              const Padding(
                 padding: EdgeInsets.all(20),
-                child: Column(children: [
-                  const Text(
-                    "Perfil de Usuario",
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(20),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Stack(
                     children: [
-                      Stack(
-                        children: [
-                          Positioned(
-                              child: Container(
-                            width: 400.0,
-                            height: 200.0,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular((20)),
-                                // AÑADIMOS AL CONTENEDOR LA IMAGEN DE FONDO ---> AssetImage
-                                image: const DecorationImage(
-                                    image:
-                                        AssetImage("assets/catWallpaper.jpg"),
-                                    fit: BoxFit.fill),
-                                border:
-                                    Border.all(color: Colors.black, width: 2)),
-                          )),
-                          Positioned(
-                              // EL POSITIONED TIENE VALORES PARA PONER MARGIN
-                              top: 37,
-                              left: 30,
-                              child: Row(children: [
-                                CircleAvatar(
-                                    radius: 60,
-                                    backgroundImage:
-                                        AssetImage("assets/imagenPerfil.jpg"),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular((100)),
-                                          // AÑADIMOS AL CONTENEDOR LA IMAGEN DE FONDO ---> AssetImage
-                                          image: const DecorationImage(
-                                              image: AssetImage(
-                                                  "assets/imagenPerfil.png"),
-                                              fit: BoxFit.fill),
-                                          border: Border.all(
-                                              color: Colors.lightBlueAccent,
-                                              width: 2)),
-                                    )),
-                                const Padding(padding: EdgeInsets.all(14)),
-                                const Text(
-                                  "nfjdsanf",
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white70),
-                                )
-                              ]))
-                        ],
-                      )
+                      Positioned(
+                          child: Container(
+                        width: 400.0,
+                        height: 200.0,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular((20)),
+                            // AÑADIMOS AL CONTENEDOR LA IMAGEN DE FONDO ---> AssetImage
+                            image: const DecorationImage(
+                                image: AssetImage("assets/catWallpaper.jpg"),
+                                fit: BoxFit.fill),
+                            border: Border.all(color: Colors.black, width: 2)),
+                      )),
+                      Positioned(
+                          // EL POSITIONED TIENE VALORES PARA PONER MARGIN
+                          top: 37,
+                          left: 30,
+                          child: Row(children: [
+                            CircleAvatar(
+                                radius: 60,
+                                backgroundImage:
+                                    AssetImage("assets/imagenPerfil.jpg"),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.circular((100)),
+                                      // AÑADIMOS AL CONTENEDOR LA IMAGEN DE FONDO ---> AssetImage
+                                      image: const DecorationImage(
+                                          image: AssetImage(
+                                              "assets/imagenPerfil.png"),
+                                          fit: BoxFit.fill),
+                                      border: Border.all(
+                                          color: Colors.lightBlueAccent,
+                                          width: 2)),
+                                )),
+                            const Padding(padding: EdgeInsets.all(14)),
+                            Text(
+                              nombre,
+                              style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white70),
+                            )
+                          ]))
                     ],
                   )
-                ]))),
+                ],
+              ),
+              const Padding(padding: EdgeInsets.all(20)),
+              Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.only(left: 30),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // LOS HIJOS DEL COLUMN SE ALINEAN A LA IZQUIERDA
+                      children: [
+                        const Text(
+                          "Nombre de usuario:",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline),
+                        ),
+                        const Padding(padding: EdgeInsets.all(10)),
+
+                        // PASAMOS EL CONTROLADOR DE NOMBRE A UN VIEWFORM
+                        ViewForm(nameController: _nameController),
+                        const Padding(padding: EdgeInsets.all(25)),
+
+                        // PARA CENTRAR EL BOTON SE UTILIZA EL CENTER
+                        Center(
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    nombre = _nameController.text;
+                                  });
+                                },
+                                child: const Text(
+                                  "Actualizar Nombre",
+                                  style: TextStyle(fontSize: 24),
+                                ))),
+                      ]))
+            ]),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ViewForm extends StatelessWidget {
+  final TextEditingController nameController;
+
+  ViewForm({super.key, required this.nameController});
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      child: TextFormField(
+        controller: nameController,  // USAMOS EL CONTROLADOR PASANDO COMO PARAMETRO
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: "Nombre",
+          hintText: "Escriba el nombre de usuario",
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Por favor ingrese su nombre de usuario';
+          }
+          return null;
+        },
       ),
     );
   }
