@@ -1,3 +1,102 @@
+# Tema 2: Generación de Interfaces de Usuario con Flutter
+## Ciclo de vida
+Flutter tiene dos tipos de widgets: `StatelessWidget` y `StatefulWidget`. Estos dos tipos tiene diferentes ciclos de vida:
+- `StatelessWidget`: son widgets sin estado, es decir, una vez que se crean, **no cambian**. Su ciclo de vida se resumen en: se construyen una vez y permanecen estáticos.
+- `StatefulWidget`: son widgets con estado, es decir, pueden **cambiar** durante la ejecución. Su ciclo de vida es más complejo, ya que Flutter debe reconstruir la interfaz de usuario cada vez que el estado cambia.
+  
+### Ejemplo
+1. Lo primero que deberemos hacer (aunque ya viene al crear el proyecto) es importar el paquete de `material.dart` que provee los componentes básicos para construir interfaces en Flutter:
+```dart
+import 'package:flutter/material.dart';
+```
+2. **Función `main()`**: es el punto de entrada de la aplicación. `runApp()` toma el widget raíz de la aplicación (`Myapp` en este caso) y lo adjunta a la pantalla del dispositivo.
+```dart
+void main() {
+  runApp(const MyApp());
+}
+```
+
+3. **Widget `Myapp`**: esta clase extiende `StatelessWidget`, lo que significa que su estructura no cambiará una vez creada.
+Dentro del `build()`, el widget `MyHomePage` es el principal contenedor que configura temas y rutas para la aplicación. 
+`home: const MyHomePage(...)` define el widget `MyHomePage` como la pantalla principal. Aquí se pasa un `título` a MyHomePage, que en este caso es "Flutter Demo Home Page".
+```dart
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false, // QUITA LA MARCA DEL DEBUG
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+```
+
+4. **Widget `MyHomePage` (StatefulWidget):** `MyHomePage` extiende `StatefulWidget`, lo que indica que su interfaz de usuario puede cambiar en respuesta a interacciones.
+`createState()` devuelve una instancia de `_MyHomePageState`, la clase que controlará el estado de `MyHomePage`.
+
+```dart
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+```
+
+5. **Clase `_MyHomePageState`:** Esta es la clase que maneja el estado de `MyHomePage`. Aquí es donde se implementará los métodos de ciclo de vida y los cambios en el estado.
+
+## Cambiar de estado
+Se puede implementar una clase State para manejar el estado del widget y utilizar el método `setState()` para actualizar el estado.
+### Ejemplo
+```dart
+class MyStatefulWidget extends StatefulWidget {
+ @override
+  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  int _counter = 0;
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    }); // METODO setState()
+  }
+  @override
+  Widget build(BuildContext context) {
+  return Column( children: [
+   Text('Presiona el botón: $_counter veces'),
+   ElevatedButton(
+      onPressed: _incrementCounter,
+      child: Text('Incrementar'),
+  ),],);}
+}
+```
+
+## Scaffold
+El `Scaffold` proporciona una estructura básica para una pantalla de Flutter, incluyendo:
+- `AppBar`: Barra superior con titulo y acciones.
+- `Drawer`: Menú lateral.
+- `BottomNavigationBar`: Menú inferior.
+- `FloatingActionButton`: Botón flotante.
+
+Ejercicios
+
+
+
+
+
+
+
+---
+
 # Tema 2: Generación de Interfaces de Usuario. Dart
 ## Introducción
 `Dart` se utiliza principalmente con Flutter para construir aplicaciones móviles nativas 
