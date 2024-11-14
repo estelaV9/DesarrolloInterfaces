@@ -90,6 +90,46 @@ boxShadow: const [
 ],
 ```
 
+## Ejercicio 20: Navegación básica
+Los dos son clases que extienden de `StatelessWidget`.
+Ir a la pantalla B:
+```dart
+ElevatedButton(
+  onPressed: () {
+    // AQUÍ SE USA `Navigator.push` PARA IR A "PantallaB"
+    Navigator.push(
+      context, // CONTEXTO ACTUAL
+      MaterialPageRoute(
+        builder: (context) => const PantallaB(), // DEFINE QUE VAS A "PantallaB"
+      ),
+    );
+  },
+  child: const Text('Ir a Pantalla B'), // TEXTO DEL BOTÓN
+),
+```
+
+Volver a la pantalla A:
+```dart
+child: ElevatedButton(
+  onPressed: () {
+    // AQUÍ SE USA `Navigator.pop` PARA VOLVER A LA PANTALLA ANTERIOR
+    Navigator.pop(context); // CIERRA LA PANTALLA ACTUAL (VUELVE A "PantallaA")
+  },
+  child: const Text('Volver a Pantalla A'), // TEXTO DEL BOTÓN
+)
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
