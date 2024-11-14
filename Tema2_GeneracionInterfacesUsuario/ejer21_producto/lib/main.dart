@@ -157,12 +157,76 @@ class ListTileGenerator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(Icons.shopping_cart),
+      leading: const Icon(Icons.shopping_cart),
       title: Text(title, style: style),
       subtitle: Text(subtitle, style: style),
       onTap: () {
-        print("Producto 3 seleccionado");
+        Product p =
+            Product(title, subtitle); // CUANDO SE PULSA, SE CREA EL PRODUCTO
+        Navigator.push(
+            context, // CONTEXTO ACTUAL
+            MaterialPageRoute(
+                builder: (context) => DetallesProductos(
+                    product: p))); // SE PASA EL PRODUCTO PULSADO
       },
     );
+  }
+}
+
+class DetallesProductos extends StatelessWidget {
+  final Product product; // RECIBE UN PRODUCTO
+  final TextStyle style = const TextStyle(fontSize: 15);
+
+  const DetallesProductos({super.key, required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text("Ejercicio 21 Pagina 63", style: style),
+          centerTitle: true, // CENTRAR EL APPBAR
+        ),
+        body: Center(
+            child: Container(
+          padding: const EdgeInsets.all(10),
+          // ESPACIO INTERIOR DENTRO DEL CONTAINER
+          margin: const EdgeInsets.symmetric(horizontal: 400, vertical: 50),
+          // ESPACIO EXTERIOR ALREDEDOR DEL CONTAINER
+          decoration: BoxDecoration(
+            color: Colors.deepPurpleAccent.shade100,
+            // COLOR DE FONDO DEL CONTENEDOR
+            borderRadius: BorderRadius.circular(15),
+            // BORDES REDONDEADOS
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3), // COLOR DE LA SOMBRA
+                spreadRadius: 5, // RANGO DE EXPANSIÓN DE LA SOMBRA
+                blurRadius: 10, // INTENSIDAD DEL DESENFOQUE DE LA SOMBRA
+                offset:
+                    const Offset(0, 5), // DESPLAZAMIENTO DE LA SOMBRA (X, Y)
+              ),
+            ],
+            border: Border.all(
+              color: Colors.deepPurple, // COLOR DEL BORDE
+              width: 2, // ANCHO DEL BORDE
+            ),
+          ),
+          child: Column(
+            children: [
+              Text(
+                product.productName,
+                style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline),
+              ),
+              Text(
+                product.description,
+                style: style,
+              )
+            ],
+          ),
+        )));
   }
 }
