@@ -114,24 +114,25 @@ class PantallaPrincipal extends StatelessWidget {
                       ListTileGenerator(
                           title: listOfProducts[0].productName,
                           subtitle: listOfProducts[0].description),
+                      // Divider(color: Colors.purple,)
                       ListTileGenerator(
-                          title: listOfProducts[0].productName,
-                          subtitle: listOfProducts[0].description),
+                          title: listOfProducts[1].productName,
+                          subtitle: listOfProducts[1].description),
                       ListTileGenerator(
-                          title: listOfProducts[0].productName,
-                          subtitle: listOfProducts[0].description),
+                          title: listOfProducts[2].productName,
+                          subtitle: listOfProducts[2].description),
                       ListTileGenerator(
-                          title: listOfProducts[0].productName,
-                          subtitle: listOfProducts[0].description),
+                          title: listOfProducts[3].productName,
+                          subtitle: listOfProducts[3].description),
                       ListTileGenerator(
-                          title: listOfProducts[0].productName,
-                          subtitle: listOfProducts[0].description),
+                          title: listOfProducts[4].productName,
+                          subtitle: listOfProducts[4].description),
                       ListTileGenerator(
-                          title: listOfProducts[0].productName,
-                          subtitle: listOfProducts[0].description),
+                          title: listOfProducts[5].productName,
+                          subtitle: listOfProducts[5].description),
                       ListTileGenerator(
-                          title: listOfProducts[0].productName,
-                          subtitle: listOfProducts[0].description),
+                          title: listOfProducts[6].productName,
+                          subtitle: listOfProducts[6].description),
                     ],
                   ),
                 )
