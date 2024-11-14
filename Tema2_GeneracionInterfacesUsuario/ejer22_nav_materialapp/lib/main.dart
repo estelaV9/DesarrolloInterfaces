@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // SE DEFINEN LAS RUTAS DE Home, Perfil y Ajustes
       routes: {
-        '/': (context) => HomePage(title: 'Ejercicio 22 Pagina 64'), // RUTA INICIAL
-        '/perfil': (context) => ProfilePage(), // RUTA PERFIL
-        '/ajustes': (context) => SettingsPage(), // RUTA PERFIL
+        '/': (context) => const HomePage(title: 'Pantalla Home'), // RUTA INICIAL
+        '/perfil': (context) => ProfilePage(title: 'Pantalla Perfil'), // RUTA PERFIL
+        '/ajustes': (context) => SettingsPage(title: 'Pantalla Ajustes',), // RUTA PERFIL
       },
       title: 'Ejercicio 22 Pagina 64',
       debugShowCheckedModeBanner: false, // QUITAR LA MARCA DEL DEBUG
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(title: 'Ejercicio 22 Pagina 64'),
+      // home: const HomePage(title: 'Ejercicio 22 Pagina 64'),
     );
   }
 }
@@ -51,7 +51,17 @@ class _MyHomePageState extends State<HomePage> {
         centerTitle: true, // CENTRAR EL APPBAR
       ),
       body: Center(
+        child: Column(
+          children: [
+            ElevatedButton(onPressed: (){
+              Navigator.pushNamed(context, '/perfil'); // IR A LA PAGINA PERFIL
+            }, child: const Text("Profile Page", style: TextStyle(fontSize: 24),)),
 
+            ElevatedButton(onPressed: (){
+              Navigator.pushNamed(context, '/ajustes'); // IR A LA PAGINA AJUSTES
+            }, child: const Text("Settings Page", style: TextStyle(fontSize: 24),))
+          ],
+        ),
       ),
     );
   }
@@ -59,7 +69,7 @@ class _MyHomePageState extends State<HomePage> {
 
 // PANTALLA DE SETTINGS
 class SettingsPage extends StatelessWidget{
-  String title;
+  final String title;
   // DEFINIR EL ESTILO PARA LOS TEXTOS DE UN TAMAÑO DE 24
   TextStyle style = const TextStyle(fontSize: 24);
   SettingsPage({super.key, required this.title});
@@ -82,7 +92,7 @@ class SettingsPage extends StatelessWidget{
 
 // PANTALLA DE PERFIL
 class ProfilePage extends StatelessWidget{
-  String title;
+  final String title;
   // DEFINIR EL ESTILO PARA LOS TEXTOS DE UN TAMAÑO DE 24
   TextStyle style = const TextStyle(fontSize: 24);
   ProfilePage({super.key, required this.title});
