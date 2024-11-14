@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Model/producto.dart';
+
 /*EJERCICIO 21: Crea una pantalla DetallesProducto que reciba un objeto Producto desde la pantalla
 principal. Al pulsar en un producto en la pantalla principal, se debe navegar a
 DetallesProducto y mostrar los detalles del objeto.
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const PantallaPrincipal(title: 'Ejercicio 21 Pagina 63'),
+      home: PantallaPrincipal(title: 'Ejercicio 21 Pagina 63'),
     );
   }
 }
@@ -31,9 +33,27 @@ class PantallaPrincipal extends StatelessWidget {
   // DEFINIR EL ESTILO PARA LOS TEXTOS DE UN TAMAÑO DE 24
   final TextStyle style = const TextStyle(fontSize: 24);
 
-  const PantallaPrincipal({super.key, required this.title});
+  PantallaPrincipal({super.key, required this.title});
 
   final String title;
+
+  // LISTA CON ALGUNOS PRODUCTOS
+  final List<Product> listOfProducts = [
+    Product('Hamburguesa Gourmet',
+        'Hamburguesa de carne de res, queso cheddar y bacon con patatas.'),
+    Product('Pizza Margherita',
+        'Pizza clásica con salsa de tomate y mozzarella fresca.'),
+    Product('Sushi California Roll',
+        'Rollos de sushi rellenos de aguacate y pepino y surimi con salsa de soya y wasabi.'),
+    Product('Tacos de Carnitas',
+        'Tacos con carne de cerdo, cebolla, cilantro y salsa roja picante.'),
+    Product(
+        'Ensalada César', 'Ensalada con lechuga, pollo a la parrilla y queso.'),
+    Product('Paella Valenciana',
+        'Arroz con mariscos, pollo, conejo y verduras, con azafrán y caldo de mariscos.'),
+    Product('Tarta de Limón',
+        'Tarta con base de galleta, relleno de crema de limón y cubierta con merengue.')
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -90,35 +110,28 @@ class PantallaPrincipal extends StatelessWidget {
                 // EXPANDED PARA OCUPAR EL ESPACIO DISPONIBLE EN LA PANTALLA
                 Expanded(
                   child: ListView(
-                    children: const [
+                    children: [
                       ListTileGenerator(
-                          title: 'Hamburguesa Gourmet',
-                          subtitle:
-                              'Hamburguesa de carne de res, queso cheddar y bacon con patatas.'),
+                          title: listOfProducts[0].productName,
+                          subtitle: listOfProducts[0].description),
                       ListTileGenerator(
-                          title: 'Pizza Margherita',
-                          subtitle:
-                              'Pizza clásica con salsa de tomate y mozzarella fresca.'),
+                          title: listOfProducts[0].productName,
+                          subtitle: listOfProducts[0].description),
                       ListTileGenerator(
-                          title: 'Sushi California Roll',
-                          subtitle:
-                              'Rollos de sushi rellenos de aguacate y pepino y surimi con salsa de soya y wasabi.'),
+                          title: listOfProducts[0].productName,
+                          subtitle: listOfProducts[0].description),
                       ListTileGenerator(
-                          title: 'Tacos de Carnitas',
-                          subtitle:
-                              'Tacos con carne de cerdo, cebolla, cilantro y salsa roja picante.'),
+                          title: listOfProducts[0].productName,
+                          subtitle: listOfProducts[0].description),
                       ListTileGenerator(
-                          title: 'Ensalada César',
-                          subtitle:
-                              'Ensalada con lechuga, pollo a la parrilla y queso.'),
+                          title: listOfProducts[0].productName,
+                          subtitle: listOfProducts[0].description),
                       ListTileGenerator(
-                          title: 'Paella Valenciana',
-                          subtitle:
-                              'Arroz con mariscos, pollo, conejo y verduras, con azafrán y caldo de mariscos.'),
+                          title: listOfProducts[0].productName,
+                          subtitle: listOfProducts[0].description),
                       ListTileGenerator(
-                          title: 'Tarta de Limón',
-                          subtitle:
-                              'Tarta con base de galleta, relleno de crema de limón y cubierta con merengue.')
+                          title: listOfProducts[0].productName,
+                          subtitle: listOfProducts[0].description),
                     ],
                   ),
                 )
