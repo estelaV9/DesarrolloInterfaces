@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+/*EJERCICIO 20:  20.Crea una navegación básica entre dos pantallas.
+ 1. Crea dos pantallas, PantallaA y PantallaB
+ 2. Usa Navegator.push() para ir de A a B.
+ 3. Implementa un botón en PantallaB que pase a la A con un Navigator.pop().*/
+
 void main() {
   runApp(const MyApp());
 }
