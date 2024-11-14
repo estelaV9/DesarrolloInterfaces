@@ -30,7 +30,9 @@ class MyApp extends StatelessWidget {
 class PantallaPrincipal extends StatelessWidget {
   // DEFINIR EL ESTILO PARA LOS TEXTOS DE UN TAMAÑO DE 24
   final TextStyle style = const TextStyle(fontSize: 24);
+
   const PantallaPrincipal({super.key, required this.title});
+
   final String title;
 
   @override
@@ -43,17 +45,22 @@ class PantallaPrincipal extends StatelessWidget {
       ),
       body: Center(
         child: Container(
-          padding: const EdgeInsets.all(10), // ESPACIO INTERIOR DENTRO DEL CONTAINER
-          margin: const EdgeInsets.symmetric(horizontal: 400, vertical: 50), // ESPACIO EXTERIOR ALREDEDOR DEL CONTAINER
+          padding: const EdgeInsets.all(10),
+          // ESPACIO INTERIOR DENTRO DEL CONTAINER
+          margin: const EdgeInsets.symmetric(horizontal: 400, vertical: 50),
+          // ESPACIO EXTERIOR ALREDEDOR DEL CONTAINER
           decoration: BoxDecoration(
-            color: Colors.deepPurpleAccent.shade100, // COLOR DE FONDO DEL CONTENEDOR
-            borderRadius: BorderRadius.circular(15), // BORDES REDONDEADOS
+            color: Colors.deepPurpleAccent.shade100,
+            // COLOR DE FONDO DEL CONTENEDOR
+            borderRadius: BorderRadius.circular(15),
+            // BORDES REDONDEADOS
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.3), // COLOR DE LA SOMBRA
                 spreadRadius: 5, // RANGO DE EXPANSIÓN DE LA SOMBRA
                 blurRadius: 10, // INTENSIDAD DEL DESENFOQUE DE LA SOMBRA
-                offset: const Offset(0, 5), // DESPLAZAMIENTO DE LA SOMBRA (X, Y)
+                offset:
+                    const Offset(0, 5), // DESPLAZAMIENTO DE LA SOMBRA (X, Y)
               ),
             ],
             border: Border.all(
@@ -61,14 +68,87 @@ class PantallaPrincipal extends StatelessWidget {
               width: 2, // ANCHO DEL BORDE
             ),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+          // CREAMOS OTRO CONTENEDOR PARA METER LA LISTA DE PRODUCTOS
+          child: Container(
+            // OCUPA EL TAMAÑO DEL ANTERIOR CONTAINER
+            width: double.infinity,
+            height: double.infinity,
+            alignment: Alignment.topLeft,
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            // ESPACIO ENTRE ESTE CONTAINER Y EL ANTERIOR
+            child: Column(
+              children: [
+                // TITULO PARA EL CONTENEDOR
+                const Text(
+                  "Lista de Productos",
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline),
+                ),
 
-            ],
+                // EXPANDED PARA OCUPAR EL ESPACIO DISPONIBLE EN LA PANTALLA
+                Expanded(
+                  child: ListView(
+                    children: const [
+                      ListTileGenerator(
+                          title: 'Hamburguesa Gourmet',
+                          subtitle:
+                              'Hamburguesa de carne de res, queso cheddar y bacon con patatas.'),
+                      ListTileGenerator(
+                          title: 'Pizza Margherita',
+                          subtitle:
+                              'Pizza clásica con salsa de tomate y mozzarella fresca.'),
+                      ListTileGenerator(
+                          title: 'Sushi California Roll',
+                          subtitle:
+                              'Rollos de sushi rellenos de aguacate y pepino y surimi con salsa de soya y wasabi.'),
+                      ListTileGenerator(
+                          title: 'Tacos de Carnitas',
+                          subtitle:
+                              'Tacos con carne de cerdo, cebolla, cilantro y salsa roja picante.'),
+                      ListTileGenerator(
+                          title: 'Ensalada César',
+                          subtitle:
+                              'Ensalada con lechuga, pollo a la parrilla y queso.'),
+                      ListTileGenerator(
+                          title: 'Paella Valenciana',
+                          subtitle:
+                              'Arroz con mariscos, pollo, conejo y verduras, con azafrán y caldo de mariscos.'),
+                      ListTileGenerator(
+                          title: 'Tarta de Limón',
+                          subtitle:
+                              'Tarta con base de galleta, relleno de crema de limón y cubierta con merengue.')
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
-      );
+    );
+  }
+}
+
+// CLASE PARA GENERAR LISTTILE
+class ListTileGenerator extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final TextStyle style = const TextStyle(fontSize: 15);
+
+  const ListTileGenerator(
+      {super.key, required this.title, required this.subtitle});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.shopping_cart),
+      title: Text(title, style: style),
+      subtitle: Text(subtitle, style: style),
+      onTap: () {
+        print("Producto 3 seleccionado");
+      },
+    );
   }
 }
