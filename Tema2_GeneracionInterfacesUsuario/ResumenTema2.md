@@ -87,11 +87,59 @@ El `Scaffold` proporciona una estructura básica para una pantalla de Flutter, i
 - `BottomNavigationBar`: Menú inferior.
 - `FloatingActionButton`: Botón flotante.
 
-Ejercicios
+## Navigator
+En Flutter, se puede utilizar el sistema de navegación basado en rutas para gestionar la transición entre pantallas.
+Las pantallas se manejan como rutas que se añaden y elminan de la pila de navegación:
+- `Navigator.push()`: Añade una nueva pantalla (ruta) a la pila.
+- `Navigator.pop()`: Quita la pantalla actual de la pila y vuelve a la anterior.
+Con datos:
+```dart
+Navigator.pop(context, 'Resultado'); // DEVUELVE 'RESULTADO' AL CERRAR LA PANTALLA ACTUAL
+```
+Con retorno de datos:
+```dart
+final resultado = await Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => SegundaPantalla()),
+);
+print('Resultado: $resultado'); // CAPTURA EL VALOR RETORNADO DE LA SEGUNDAPANTALLA
+```
 
+### Navegación con rutas
+Las rutas se deefinen en `MaterialApp`, dentro de la propiedad `routes`,  y cada pantalla se puede identificar por su nombre. Esto es útil cuando quieres manejar rutas complejas o reusar rutas en distintos puntos de la aplicación.
+`Navigator.pushNamed()`: Navega utilizando una ruta con su nombre.
+```dart
+MaterialApp(
+  routes: {
+    '/': (context) => PrimeraPantalla(),  // RUTA INICIAL
+    '/segunda': (context) => SegundaPantalla(),
+  },
+)
+// Navegación con rutas nombradas
+Navigator.pushNamed(context, '/segunda'); // NAVEGA A LA PANTALLA IDENTIFICADA COMO '/SEGUNDA'
+```
 
+### Paso de datos entre pantallas
+Se pueden pasar objetos o tipos de datos simples a través de los parámetros del constructor:
+1. Primera Pantalla
+```dart
+Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => DetallesPantalla(datos: 'Datos Ejemplo')),
+); // PASA 'DATOS EJEMPLO' A LA SEGUNDA PANTALLA
+```
+2. Segunda Pantalla
+```dart
+class DetallesPantalla extends StatelessWidget {
+  final String datos;
+  DetallesPantalla({required this.datos}); // RECIBE LOS DATOS EN EL CONSTRUCTOR
 
-
+  @override
+  Widget build(BuildContext context) {
+    return Text(datos); // MUESTRA LOS DATOS RECIBIDOS EN LA PANTALLA
+  }
+}
+```
 
 
 
