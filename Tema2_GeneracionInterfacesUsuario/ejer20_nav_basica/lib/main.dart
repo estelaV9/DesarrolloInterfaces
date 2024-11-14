@@ -11,33 +11,39 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Ejercicio 20 Pagina 63',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Ejercicio 20 Pagina 63'),
+      home: const PantallaA(title: 'Ejercicio 20 Pagina 63'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class PantallaA extends StatelessWidget {
+  const PantallaA({super.key, required this.title});
   final String title;
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title, style: TextStyle(fontSize: 24),),
+        title: const Text('Pantalla A'), // TITULO DE LA BARRA SUPERIOR
       ),
       body: Center(
-
+        child: ElevatedButton(
+          onPressed: () {
+            // AQUÍ SE USA `Navigator.push` PARA IR A "PantallaB"
+            Navigator.push(
+              context, // CONTEXTO ACTUAL
+              MaterialPageRoute(
+                builder: (context) => const PantallaB(), // DEFINE QUE VAS A "PantallaB"
+              ),
+            );
+          },
+          child: const Text('Ir a Pantalla B'), // TEXTO DEL BOTÓN
+        ),
       ),
     );
   }
