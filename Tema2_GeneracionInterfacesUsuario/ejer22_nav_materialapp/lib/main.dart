@@ -14,26 +14,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // SE DEFINEN LAS RUTAS DE Home, Perfil y Ajustes
+      routes: {
+        '/': (context) => HomePage(title: 'Ejercicio 22 Pagina 64'), // RUTA INICIAL
+        '/perfil': (context) => ProfilePage(), // RUTA PERFIL
+        '/ajustes': (context) => SettingsPage(), // RUTA PERFIL
+      },
       title: 'Ejercicio 22 Pagina 64',
       debugShowCheckedModeBanner: false, // QUITAR LA MARCA DEL DEBUG
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Ejercicio 22 Pagina 64'),
+      home: const HomePage(title: 'Ejercicio 22 Pagina 64'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key, required this.title});
   final String title;
-
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<HomePage> {
   // DEFINIR EL ESTILO PARA LOS TEXTOS DE UN TAMAÑO DE 24
   TextStyle style = const TextStyle(fontSize: 24);
 
@@ -43,6 +48,51 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title, style: style),
+        centerTitle: true, // CENTRAR EL APPBAR
+      ),
+      body: Center(
+
+      ),
+    );
+  }
+}
+
+// PANTALLA DE SETTINGS
+class SettingsPage extends StatelessWidget{
+  String title;
+  // DEFINIR EL ESTILO PARA LOS TEXTOS DE UN TAMAÑO DE 24
+  TextStyle style = const TextStyle(fontSize: 24);
+  SettingsPage({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(title, style: style),
+        centerTitle: true, // CENTRAR EL APPBAR
+      ),
+      body: Center(
+
+      ),
+    );
+  }
+}
+
+
+// PANTALLA DE PERFIL
+class ProfilePage extends StatelessWidget{
+  String title;
+  // DEFINIR EL ESTILO PARA LOS TEXTOS DE UN TAMAÑO DE 24
+  TextStyle style = const TextStyle(fontSize: 24);
+  ProfilePage({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(title, style: style),
         centerTitle: true, // CENTRAR EL APPBAR
       ),
       body: Center(
