@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'DetallesImc.dart';
 import 'Model/IMC.dart';
 
 void main() {
@@ -43,7 +43,7 @@ class _CalculatorState extends State<CalculatorPage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(
           widget.title,
-          style: TextStyle(fontSize: 35),
+          style: const TextStyle(fontSize: 35),
         ),
       ),
       body: Center(
@@ -59,7 +59,7 @@ class _CalculatorState extends State<CalculatorPage> {
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                 )),
-            Padding(padding: EdgeInsets.all(20)),
+            const Padding(padding: EdgeInsets.all(20)),
             SliderTheme(
                 data: SliderTheme.of(context).copyWith(),
                 child: Slider(
@@ -72,16 +72,16 @@ class _CalculatorState extends State<CalculatorPage> {
                     });
                   },
                 )),
-            Padding(padding: EdgeInsets.all(20)),
+            const Padding(padding: EdgeInsets.all(20)),
             Container(
                 height: 70,
                 width: 110,
                 decoration: const BoxDecoration(color: Colors.grey),
                 child: Center(
                   child: Text("${alturaImc.toStringAsFixed(2)} m",
-                      style: TextStyle(fontSize: 28)),
+                      style: const TextStyle(fontSize: 28)),
                 )),
-            Padding(padding: EdgeInsets.all(20)),
+            const Padding(padding: EdgeInsets.all(20)),
             SliderTheme(
                 data: SliderTheme.of(context).copyWith(),
                 child: Slider(
@@ -94,7 +94,7 @@ class _CalculatorState extends State<CalculatorPage> {
                     });
                   },
                 )),
-            Padding(padding: EdgeInsets.all(20)),
+            const Padding(padding: EdgeInsets.all(20)),
             ElevatedButton(
                 onPressed: () {
                   Imc imc = Imc(kilosImc, alturaImc);
