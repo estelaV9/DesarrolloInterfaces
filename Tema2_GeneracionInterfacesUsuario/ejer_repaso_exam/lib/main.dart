@@ -105,13 +105,17 @@ class _CalculatorState extends State<CalculatorPage> {
                               imcPasado: imc, title: 'Calculadora IMC')));
                 },
                 style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.red),
-                    shape: WidgetStateProperty.all(
-                      const RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.zero, // Sin bordes redondeados
-                      ),
-                    )),
+                  backgroundColor: WidgetStateProperty.all(Colors.red),
+                  shape: WidgetStateProperty.all(
+                    const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero, // SIN REDONDEAR BORDES
+                    ),
+                  ),
+                  // "AUMENTA" EL TAMAÑO DEL BOTON AUMENTANDO EL ESPACION INTERNO
+                  padding: WidgetStateProperty.all(
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                  ),
+                ),
                 child: const Text("CALCULAR",
                     style: TextStyle(color: Colors.white, fontSize: 24)))
           ],
