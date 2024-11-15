@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Model/IMC.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -31,6 +33,9 @@ class CalculatorPage extends StatefulWidget {
 }
 
 class _CalculatorState extends State<CalculatorPage> {
+  int kilosImc = 40; // ATRIBUTO PARA GUARDAR LOS KILOS
+  double alturaImc = 1.20; // ATRIBUTO PARA GUARDAR LA ALTURA
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,18 +55,22 @@ class _CalculatorState extends State<CalculatorPage> {
                 width: 110,
                 decoration: const BoxDecoration(color: Colors.grey),
                 child: Center(
-                  child: Text("80 KG",
+                  child: Text(("$kilosImc KG") as String,
                       style:
-                          TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                 )),
             Padding(padding: EdgeInsets.all(20)),
             SliderTheme(
                 data: SliderTheme.of(context).copyWith(),
                 child: Slider(
-                  min: 1.20,
-                  max: 2.10,
-                  value: 2.10,
-                  onChanged: (double value) {},
+                  min: 40,
+                  max: 100,
+                  value: kilosImc.toDouble(),
+                  onChanged: (double newvalue) {
+                    setState(() {
+                      kilosImc = newvalue.toInt();
+                    });
+                  },
                 )),
             Padding(padding: EdgeInsets.all(20)),
             Container(
@@ -69,7 +78,8 @@ class _CalculatorState extends State<CalculatorPage> {
                 width: 110,
                 decoration: const BoxDecoration(color: Colors.grey),
                 child: Center(
-                  child: Text("1.70 m", style: TextStyle(fontSize: 28)),
+                  child: Text("${alturaImc.toStringAsFixed(2)} m",
+                      style: TextStyle(fontSize: 28)),
                 )),
             Padding(padding: EdgeInsets.all(20)),
             SliderTheme(
@@ -77,15 +87,32 @@ class _CalculatorState extends State<CalculatorPage> {
                 child: Slider(
                   min: 1.20,
                   max: 2.10,
-                  value: 2.10,
-                  onChanged: (double value) {},
+                  value: alturaImc.toDouble(),
+                  onChanged: (double value) {
+                    setState(() {
+                      alturaImc = value.toDouble();
+                    });
+                  },
                 )),
             Padding(padding: EdgeInsets.all(20)),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Imc imc = Imc(kilosImc, alturaImc);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DetallesImc(
+                              imcPasado: imc, title: 'Calculadora IMC')));
+                },
                 style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.red)),
-                child: Text("CALCULAR",
+                    backgroundColor: WidgetStateProperty.all(Colors.red),
+                    shape: WidgetStateProperty.all(
+                      const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.zero, // Sin bordes redondeados
+                      ),
+                    )),
+                child: const Text("CALCULAR",
                     style: TextStyle(color: Colors.white, fontSize: 24)))
           ],
         ),
