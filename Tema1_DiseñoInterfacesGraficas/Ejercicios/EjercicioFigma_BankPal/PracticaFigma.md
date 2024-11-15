@@ -202,6 +202,18 @@ del módulo de **PMDM**.
 Realizar un vídeo demostrativo de la funcionalidad del proyecto.
 
 
+## Nota
+<table>
+  <tr>
+    <th>
+      Nota
+    </th>
+  </tr>
+  <tr>
+    <td>10/10. Está todo perfecto, muchísimo curro</td>
+  </tr>
+</table>
+
 ---
 <div align="center">
   <h2>¡Disfruta del Proyecto!</h2>
