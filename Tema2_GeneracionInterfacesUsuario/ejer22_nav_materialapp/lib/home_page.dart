@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'profile_page.dart';
+import 'settings_page.dart';
+
 /*EJERCICIO 22: Define tres rutas: Home, Perfil y Ajustes en MaterialApp. Implementa
 navegación entre ellas usando Navigator.pushNamed y botones en cada
 pantalla que redirija a una de las otras dos*/
@@ -62,51 +65,6 @@ class _MyHomePageState extends State<HomePage> {
             }, child: const Text("Settings Page", style: TextStyle(fontSize: 24),))
           ],
         ),
-      ),
-    );
-  }
-}
-
-// PANTALLA DE SETTINGS
-class SettingsPage extends StatelessWidget{
-  final String title;
-  // DEFINIR EL ESTILO PARA LOS TEXTOS DE UN TAMAÑO DE 24
-  TextStyle style = const TextStyle(fontSize: 24);
-  SettingsPage({super.key, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title, style: style),
-        centerTitle: true, // CENTRAR EL APPBAR
-      ),
-      body: Center(
-
-      ),
-    );
-  }
-}
-
-
-// PANTALLA DE PERFIL
-class ProfilePage extends StatelessWidget{
-  final String title;
-  // DEFINIR EL ESTILO PARA LOS TEXTOS DE UN TAMAÑO DE 24
-  TextStyle style = const TextStyle(fontSize: 24);
-  ProfilePage({super.key, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title, style: style),
-        centerTitle: true, // CENTRAR EL APPBAR
-      ),
-      body: Center(
-
       ),
     );
   }
