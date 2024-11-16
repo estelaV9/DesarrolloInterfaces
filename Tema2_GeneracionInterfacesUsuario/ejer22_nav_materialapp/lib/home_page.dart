@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 import 'profile_page.dart';
 import 'settings_page.dart';
 
-/*EJERCICIO 22: Define tres rutas: Home, Perfil y Ajustes en MaterialApp. Implementa
-navegación entre ellas usando Navigator.pushNamed y botones en cada
-pantalla que redirija a una de las otras dos*/
-
 void main() {
   runApp(const MyApp());
 }
@@ -29,40 +25,35 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      // home: const HomePage(title: 'Ejercicio 22 Pagina 64'),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key, required this.title});
   final String title;
-  @override
-  State<HomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<HomePage> {
-  // DEFINIR EL ESTILO PARA LOS TEXTOS DE UN TAMAÑO DE 24
-  TextStyle style = const TextStyle(fontSize: 24);
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle buttonStyle = const TextStyle(fontSize: 24);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title, style: style),
+        title: Text(title, style: buttonStyle),
         centerTitle: true, // CENTRAR EL APPBAR
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(onPressed: (){
               Navigator.pushNamed(context, '/perfil'); // IR A LA PAGINA PERFIL
-            }, child: const Text("Profile Page", style: TextStyle(fontSize: 24),)),
+            }, child: Text("Profile Page", style: buttonStyle)),
 
             ElevatedButton(onPressed: (){
               Navigator.pushNamed(context, '/ajustes'); // IR A LA PAGINA AJUSTES
-            }, child: const Text("Settings Page", style: TextStyle(fontSize: 24),))
+            }, child: Text("Settings Page", style: buttonStyle))
           ],
         ),
       ),
