@@ -35,6 +35,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _currentIndex = 0; // INDICE ACTUAL DEL BOTTOM NAVIGATION BAR
+
+  // LISTA DE WIDGETS PARA CADA PANTALLA
+  final List<Widget> _screens = [
+    HomeScreen(),
+    ProfileScreen(),
+    SettingsScreen(),
+  ];
+
+  void _onTap(int index) {
+    setState(() {
+      _currentIndex = index; // ACTUALIZA EL INDICE
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +57,61 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
+      body: _screens[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Perfil"),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Ajustes")
+        ],
+        currentIndex: _currentIndex,
+        onTap: _onTap,
+      ),
+    );
+  }
+}
+
+// PANTALLAS INDIVIDUALES
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: 20,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text("Elemento $index"),
+          leading: Icon(Icons.star),
+          onTap: () {
+            // ACCIÓN AL PULSAR UN ELEMENTO DE LA LISTA
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Elemento $index pulsado")),
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text(
+        "Pantalla de Perfil",
+        style: TextStyle(fontSize: 24),
+      ),
+    );
+  }
+}
+
+class SettingsScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text(
+        "Pantalla de Ajustes",
+        style: TextStyle(fontSize: 24),
       ),
     );
   }
