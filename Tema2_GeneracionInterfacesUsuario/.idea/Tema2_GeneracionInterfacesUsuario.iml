@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/ejer14_form_boton/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer14_form_boton/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer14_form_boton/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer13_login_registro/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer13_login_registro/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer13_login_registro/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer22_nav_materialapp/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer22_nav_materialapp/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer22_nav_materialapp/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer21_producto/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer21_producto/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer21_producto/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer7_tarjeta_container/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer7_tarjeta_container/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer7_tarjeta_container/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer4_texto_dinamico/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer4_texto_dinamico/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer4_texto_dinamico/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer8_tarjetas/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer8_tarjetas/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer8_tarjetas/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer1_mensaje_bienvenida/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer1_mensaje_bienvenida/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer1_mensaje_bienvenida/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer_repaso_exam/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer_repaso_exam/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer_repaso_exam/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer5_floating_button/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer5_floating_button/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer5_floating_button/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer9_interfaz_usuario/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer9_interfaz_usuario/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer9_interfaz_usuario/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer15_perfil_user/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer15_perfil_user/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer15_perfil_user/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer11_formulario/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer11_formulario/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer11_formulario/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer2_texto_y_boton/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer2_texto_y_boton/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer2_texto_y_boton/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer3_contador_boton/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer3_contador_boton/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer3_contador_boton/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer20_nav_basica/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer20_nav_basica/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer20_nav_basica/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejercicios_dart/ejercicios_dart_tema2/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejercicios_dart/ejercicios_dart_tema2/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejercicios_dart/ejercicios_dart_tema2/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer12_galeria_img/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer12_galeria_img/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer12_galeria_img/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer6_text_column_row/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer6_text_column_row/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ejer6_text_column_row/.dart_tool" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
