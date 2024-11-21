@@ -12,11 +12,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -36,6 +36,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late var isPulsado = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,49 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
+        child: Container(
+          margin: EdgeInsets.all(20),
+          width: 400,
+          decoration: BoxDecoration(color: Colors.grey),
+          child: ListView(
+            children: [
+              ListTile(
+                  leading: Checkbox(
+                      value: isPulsado,
+                      onChanged: (value) {
+                        setState(() {
+                          if (isPulsado) {
+                            value = isPulsado;
+                          } else {
+                            value = isPulsado;
+                          }
+                          isPulsado = !isPulsado;
+                        });
+                      }),
+                  title: text(isPulsado, "Prueba 1")),
+              ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Añadir",
+                    style: TextStyle(fontSize: 24),
+                  ))
+            ],
+          ),
+        ),
       ),
     );
   }
 }
+
+Text text(bool isPulsado, String nombre) {
+  if (isPulsado) {
+    return Text(
+      nombre,
+      style: TextStyle(color: Colors.black),
+    );
+  } else {
+    return Text(nombre,
+        style: const TextStyle(
+            color: Colors.black26, decoration: TextDecoration.lineThrough));
+  }
+} // FUNCION PARA DEVOLVER EL TEXTO CON ESTILO SEGUN SI HA PULSADO EL CHECKBOX O NO
