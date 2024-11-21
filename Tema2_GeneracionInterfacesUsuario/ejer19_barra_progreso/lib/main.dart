@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 /*EJERCICIO 19: Crea una barra de progreso que se rellene al presionar un botón, simulando
@@ -36,7 +38,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
+  late double valueLine = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +47,27 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
+        child: Container(
+          height: 400,
+          margin: EdgeInsets.all(20),
+          decoration: BoxDecoration(color: Colors.grey),
+          child: Column(
+            children: [
+              SizedBox(height: 20,),
+              LinearProgressIndicator(
+                value: valueLine / 100,
 
+              ),
+              SizedBox(height: 20,),
+              ElevatedButton(onPressed: (){
+                setState(() {
+                  valueLine += 10;
+                });
+              }, style: ButtonStyle(),
+                  child: Text("Aumentar", style: TextStyle(fontSize: 24),))
+            ],
+          ),
+        ),
       ),
     );
   }
