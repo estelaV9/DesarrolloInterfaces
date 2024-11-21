@@ -35,6 +35,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Color bgColor = Colors.red;
+  Color boxColor = Colors.blue;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,22 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
+      backgroundColor: bgColor,
+      body: GestureDetector(
+        onTap: () {
+          Color colorAux = bgColor;
+          setState(() {
+            bgColor = boxColor;
+            boxColor = colorAux;
+          });
+        },
+        child: Center(
+          child: Container(
+            width: 100,
+            height: 100,
+            color: boxColor,
+          ),
+        ),
       ),
     );
   }
