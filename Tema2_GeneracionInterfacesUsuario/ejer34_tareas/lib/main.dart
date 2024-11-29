@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -26,8 +28,7 @@ void main() async {
   final dbFactory = databaseFactoryFfi;
 
   // OBTENER LA RUTA DE LA BD
-  final dbPath =
-      join(await dbFactory.getDatabasesPath(), 'taskManagement.db');
+  final dbPath = join(await dbFactory.getDatabasesPath(), 'taskManagement.db');
   final db = await dbFactory.openDatabase(dbPath);
 
   // CREAMOS LA TABLA 'tasks' SI NO EXISTE
@@ -51,26 +52,32 @@ class TaskManagementApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Ejercicio 34: Gestion Tareas'),
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: TaskManagementScreen(
+            title: 'Gestor de Tareas', database: database));
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class TaskManagementScreen extends StatefulWidget {
+  const TaskManagementScreen(
+      {super.key, required this.title, required this.database});
 
   final String title;
+  final Database database; // ATRIBUTO PARA PASAR LA DB
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<TaskManagementScreen> createState() => _TaskManagementScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _TaskManagementScreenState extends State<TaskManagementScreen> {
+  final _titleController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _keyForm = GlobalObjectKey<FormState>;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +85,32 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Form(
+                  child: Row(
+                children: [
+                  TextFormField(
+                    controller: _titleController,
+                    decoration: InputDecoration(
+                      label: Text("Título")
+                    ),
+                  ),
+                  TextFormField(
+                    controller: _descriptionController,
+                    decoration: InputDecoration(
+                      label: Text("Descripción")
+                    ),
+                  )
+                ],
+              ))
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
