@@ -9,11 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:ejemplo_sqlite_task/main.dart';
+import 'package:sqflite/sqflite.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(TaskApp(database: await databaseFactory.openDatabase('tasks.db'),));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
