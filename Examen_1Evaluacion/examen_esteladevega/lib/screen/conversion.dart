@@ -20,10 +20,24 @@ class _ConversionPageState extends State<ConversionPage> {
   };
 
   late int index;
-  final List<DropdownMenuEntry<dynamic>> monedas = [
-    const DropdownMenuEntry(label: "USD", value: 1),
-    const DropdownMenuEntry(label: "EUR", value: 2),
-    const DropdownMenuEntry(label: "JPY", value: 3),
+
+  String valorOrigen = "USD";
+  String valorDestino = "USD";
+
+  double cantidad = 0; // VALORES INICIALES
+  var monedas = [
+    const DropdownMenuItem(
+      value: "USD",
+      child: Text("USD"),
+    ),
+    const DropdownMenuItem(
+      value: "EUR",
+      child: Text("EUR"),
+    ),
+    const DropdownMenuItem(
+      value: "JPY",
+      child: Text("JPY"),
+    )
   ];
 
   @override
@@ -38,7 +52,7 @@ class _ConversionPageState extends State<ConversionPage> {
               color: Colors.grey,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
-              child: Container(
+              child: SizedBox(
                 height: 120,
                 width: 250,
                 child: Padding(
@@ -47,17 +61,26 @@ class _ConversionPageState extends State<ConversionPage> {
                       alignment: Alignment.centerLeft,
                       child: Column(
                         children: [
-                          Text(
+                          const Text(
                             "Moneda de Origen: ",
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
-                          DropdownMenu(dropdownMenuEntries: monedas)
+                          DropdownButton(
+                            items: monedas,
+                            onChanged: (value) {
+                              setState(() {
+                                // CAMBIA VALOR DEL STRING DE valorOrigen AL VALOR QUE SE HAYA PULSADO
+                                valorOrigen = value.toString();
+                              });
+                            },
+                            value: valorOrigen,
+                          ),
                         ],
                       ),
                     )),
@@ -70,30 +93,39 @@ class _ConversionPageState extends State<ConversionPage> {
               color: Colors.grey,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
-              child: Container(
+              child: SizedBox(
                 height: 120,
                 width: 250,
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         "Moneda de Destino: ",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
-                      DropdownMenu(dropdownMenuEntries: monedas)
+                      DropdownButton(
+                        items: monedas,
+                        onChanged: (value) {
+                          setState(() {
+                            // CAMBIA VALOR DEL STRING DE valorOrigen AL VALOR QUE SE HAYA PULSADO
+                            valorDestino = value.toString();
+                          });
+                        },
+                        value: valorDestino,
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -108,9 +140,9 @@ class _ConversionPageState extends State<ConversionPage> {
                         child: Row(children: [
                           Expanded(
                               child: Padding(
-                                  padding: EdgeInsets.all(20),
+                                  padding: const EdgeInsets.all(20),
                                   child: Column(children: [
-                                    Align(
+                                    const Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
                                         "Cantidad: ",
@@ -145,58 +177,43 @@ class _ConversionPageState extends State<ConversionPage> {
             ),
 
             // AÑADIRLO A UN CONTENEDOR Y DARLE UN TAMAÑO FIJO PARA QUE NO SE EXPANDA
-            Container(
+            SizedBox(
                 width: 200,
                 child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        const SizedBox(
-                          height: 20,
-                        );
-                        // la intencion estaba en que se pulsara y saliera un card, pero no funciona jajs
-                        Card(
-                          color: Colors.grey,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Container(
-                            height: 120,
-                            width: 250,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "Resultado: " + _cantidadController.text,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
+                        Map<String, double> mapaOrigen =
+                            ratioCambios[valorOrigen]!;
+                        double valorCambio = mapaOrigen[valorDestino]!;
+
+                        setState(() {
+                          cantidad = (double.parse(_cantidadController.text)) *
+                              valorCambio;
+                        });
                       }
                     },
-                    style: ButtonStyle(alignment: Alignment.center),
-                    child: const Row(
-                      children: [
-                        Icon(Icons.arrow_drop_down_outlined),
-                        SizedBox(
-                          width: 10,
+                    style: const ButtonStyle(alignment: Alignment.center),
+                    child: const Row(children: [
+                      Icon(Icons.arrow_drop_down_outlined),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Convertir",
+                        style: TextStyle(
+                          fontSize: 20,
                         ),
-                        Text(
-                          "Convertir",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    )))
+                      ),
+                    ]))),
+            const Padding(padding: EdgeInsets.all(10)),
+            (cantidad != 0)
+                ? Card(
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      child: Text("Resultado: $cantidad $valorDestino"),
+                    ),
+                  )
+                : const Padding(padding: EdgeInsets.all(0))
           ],
         ),
       ),

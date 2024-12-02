@@ -11,12 +11,7 @@ class _AjustesPageState extends State<AjustesPage> {
   late var isEncendido = false;
 
   late int index;
-
-  final List<DropdownMenuEntry<dynamic>> idiomas = [
-    const DropdownMenuEntry(label: "Español", value: 1),
-    const DropdownMenuEntry(label: "Inglés", value: 2),
-    const DropdownMenuEntry(label: "Aleman", value: 3),
-  ];
+  String idioma = "ESP";
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +25,7 @@ class _AjustesPageState extends State<AjustesPage> {
               children: [
                 Expanded(
                     child: Container(
-                  margin: EdgeInsets.all(20),
+                  margin: const EdgeInsets.all(20),
                   height: 70,
                   width: 250,
                   decoration: BoxDecoration(
@@ -41,8 +36,8 @@ class _AjustesPageState extends State<AjustesPage> {
                     padding: const EdgeInsets.all(10),
                     child: Row(
                       children: [
-                        Icon(Icons.language),
-                        SizedBox(
+                        const Icon(Icons.language),
+                        const SizedBox(
                           width: 10,
                         ),
                         const Text(
@@ -59,7 +54,32 @@ class _AjustesPageState extends State<AjustesPage> {
                             child: SizedBox(
                           width: 950,
                         )),
-                        DropdownMenu(dropdownMenuEntries: idiomas)
+                        DropdownButton(
+                          items: const [
+                            DropdownMenuItem(
+                              value: "ESP",
+                              child: Text("Español"),
+                            ),
+                            DropdownMenuItem(
+                              value: "ENG",
+                              child: Text("Inglés"),
+                            ),
+                            DropdownMenuItem(
+                              value: "DEU",
+                              child: Text("Alemán"),
+                            ),
+                            DropdownMenuItem(
+                              value: "FRA",
+                              child: Text("Francés"),
+                            ),
+                          ],
+                          onChanged: (value) {
+                            setState(() {
+                              idioma = value!;
+                            });
+                          },
+                          value: idioma,
+                        )
                       ],
                     ),
                   ),
