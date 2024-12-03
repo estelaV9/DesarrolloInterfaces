@@ -77,6 +77,7 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _keyForm = GlobalObjectKey<FormState>;
+  var filtro = "Todas";
 
   @override
   Widget build(BuildContext context) {
@@ -84,29 +85,59 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        centerTitle: true,
+        actions: [
+          DropdownButton(
+            items: const [
+              DropdownMenuItem(
+                value: "Todas",
+                child: Text("Todas"),
+              ),
+              DropdownMenuItem(
+                value: "Pendiente",
+                child: Text("Pendiente"),
+              ),
+              DropdownMenuItem(
+                value: "Completada",
+                child: Text("Completada"),
+              ),
+            ],
+            onChanged: (value) {
+              setState(() {
+                filtro = value!;
+              });
+            },
+            value: filtro,
+          )
+        ],
       ),
       body: Center(
         child: Padding(
           padding: EdgeInsets.all(20),
           child: Column(
             children: [
-              Form(
-                  child: Row(
+              Row(
                 children: [
-                  TextFormField(
-                    controller: _titleController,
-                    decoration: InputDecoration(
-                      label: Text("Título")
+                  Expanded(
+                    child: TextFormField(
+                      controller: _titleController,
+                      decoration: InputDecoration(label: Text("Título")),
                     ),
                   ),
-                  TextFormField(
-                    controller: _descriptionController,
-                    decoration: InputDecoration(
-                      label: Text("Descripción")
+                  const SizedBox(width: 10), // Espaciado entre los campos
+                  Expanded(
+                    child: TextFormField(
+                      controller: _descriptionController,
+                      decoration:
+                          const InputDecoration(label: Text("Descripción")),
                     ),
-                  )
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton(onPressed: () {}, child: const Icon(Icons.add))
                 ],
-              ))
+              )
             ],
           ),
         ),
