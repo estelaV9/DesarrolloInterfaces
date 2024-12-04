@@ -7,7 +7,6 @@ import 'package:path/path.dart';
 * TENDRA TRES BOTONES QUE SEAN READ (carga a la lista), UPDATE (jose -> 30) Y
 * DELETE DONDE ELIMINARA A JOSE*/
 
-
 void main() async {
   // INICIALIZAR EL sqflite PARA ESCRITORIO
   sqfliteFfiInit();
@@ -44,16 +43,17 @@ class PersonApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const PersonScreen(title: 'Ejercicio sencillo SQLite'),
+      home:
+          PersonScreen(title: 'Ejercicio sencillo SQLite', database: database),
     );
   }
 }
 
-
-
 // PANTALLA PERSON
 class PersonScreen extends StatefulWidget {
-  const PersonScreen({super.key, required this.title});
+  final Database database;
+
+  const PersonScreen({super.key, required this.title, required this.database});
 
   final String title;
 
@@ -62,6 +62,26 @@ class PersonScreen extends StatefulWidget {
 }
 
 class _PersonScreenState extends State<PersonScreen> {
+  List<Map<String, dynamic>> _persons = []; // LISTA PARA METER A LAS PERSONAS
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPerson(); // LLAMAR AL METODO PARA CARGAR LAS PERSONAS
+  } // AL INICIAR LA APLICACION
+
+  Future<void> _loadPerson() async {
+    final personsQuery = await widget.database.query('person');
+    setState(() {
+      _persons = personsQuery;
+    });
+  } // FUNCION PARA ACTULIZAR EL ESTADO DE LAS PERSONAS
+
+  Future<void> _addPerson(String name, int age) async {
+    // INSERTAR EN LA TABLA persons EL NOMBRE Y LA EDAD DE LA PERSONA
+    await widget.database.insert('person', {'nombre': name, 'edad': age});
+    _loadPerson();
+  } // METODO PARA AÑADIR PERSONAS
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +91,27 @@ class _PersonScreenState extends State<PersonScreen> {
         title: Text(widget.title),
       ),
       body: Center(
-
-      ),
+          child: Row(
+        children: [
+          Expanded(
+              child: ListView.builder(
+                  itemCount: _persons.length,
+                  itemBuilder: (context, index) {
+                    final person = _persons[index];
+                    return ListTile(
+                      title:
+                          Text(person['nombre'] + " Edad: " + person['edad']),
+                    );
+                  })),
+          ElevatedButton(
+              onPressed: () {
+                _addPerson("Jose", 20);
+                _addPerson("Carmen", 25);
+                _loadPerson();
+              },
+              child: Text("data"))
+        ],
+      )),
     );
   }
 }
