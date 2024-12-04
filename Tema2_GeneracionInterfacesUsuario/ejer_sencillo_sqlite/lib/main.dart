@@ -44,21 +44,24 @@ class PersonApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Ejercicio sencillo SQLite'),
+      home: const PersonScreen(title: 'Ejercicio sencillo SQLite'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+
+
+// PANTALLA PERSON
+class PersonScreen extends StatefulWidget {
+  const PersonScreen({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<PersonScreen> createState() => _PersonScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _PersonScreenState extends State<PersonScreen> {
 
   @override
   Widget build(BuildContext context) {
