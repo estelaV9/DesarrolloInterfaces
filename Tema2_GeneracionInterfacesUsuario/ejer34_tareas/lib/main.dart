@@ -5,8 +5,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path/path.dart';
 
-import 'model/Tasks.dart';
-
 /* EJERCICIO 34: Crea una aplicación que permita al usuario:
     • Agregar tareas con un título y descripción.
     • Marcar tareas como completadas o pendientes.
@@ -33,9 +31,9 @@ void main() async {
   final dbPath = join(await dbFactory.getDatabasesPath(), 'taskManagement.db');
   final db = await dbFactory.openDatabase(dbPath);
 
-  // CREAMOS LA TABLA 'tasks' SI NO EXISTE
+  // CREAMOS LA TABLA 'tasksTable' SI NO EXISTE
   await db.execute('''
-  CREATE TABLE IF NOT EXISTS tasks (
+  CREATE TABLE IF NOT EXISTS tasksTable (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     description TEXT NOT NULL,
@@ -81,38 +79,87 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
   final _keyForm = GlobalKey<FormState>();
   var filtro = "Todas";
   List<Map<String, dynamic>> _tasks = []; // LISTA PARA ALMACENAR LAS TAREAS
-  final _taskController =
-  TextEditingController(); // CONTROLADOR PARA EL CAMPO DE TEXTO
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTask(); // CARGAR LAS TAREAS AL INICIAR
+  }
+
+  Future<void> _loadTask() async {
+    String whereClause = '';
+    List<String> whereArgs = [];
+
+    // FILTRO POR ESTADO
+    if (filtro == 'Pendiente') {
+      whereClause = 'isCompleted = ?';
+      whereArgs.add('0');
+    } else if (filtro == 'Completada') {
+      whereClause = 'isCompleted = ?';
+      whereArgs.add('1');
+    }
+
+    final tasksQuery = await widget.database.query('tasksTable',
+        where: whereClause.isNotEmpty ? whereClause : null,
+        whereArgs: whereArgs.isNotEmpty ? whereArgs : null);
+    setState(() {
+      _tasks = tasksQuery;
+    });
+  } // MÉTODO PARA CARGAR LAS TAREAS DESDE LA BASE DE DATOS
+
+  Future<void> _addTask(String title, String description) async {
+    await widget.database.insert('tasksTable', {
+      'title': title,
+      'description': description,
+      'isCompleted': 0 // NUEVAS TAREAS SON PENDIENTES POR DEFECTO
+    });
+    _loadTask(); // RECARGAR LAS TAREAS
+  } // MÉTODO PARA AÑADIR UNA NUEVA TAREA
+
+  Future<void> _deleteTask(int id) async {
+    await widget.database
+        .delete('tasksTable', where: 'id = ?', whereArgs: [id]);
+    _loadTask(); // RECARGAR LAS TAREAS
+  } // MÉTODO PARA ELIMINAR UNA TAREA
+
+  Future<void> _updateTaskStatus(int id, int newStatus) async {
+    await widget.database.update(
+      'tasksTable',
+      {'isCompleted': newStatus},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    _loadTask(); // RECARGAR LAS TAREAS
+  } // MÉTODO PARA ACTUALIZAR EL ESTADO DE UNA TAREA
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
         centerTitle: true,
         actions: [
+          // FILTRO DE TAREAS
           DropdownButton(
             items: const [
               DropdownMenuItem(
                 value: "Todas",
-                child: Text("Todas"),
+                child: Text("TODAS"),
               ),
               DropdownMenuItem(
                 value: "Pendiente",
-                child: Text("Pendiente"),
+                child: Text("PENDIENTE"),
               ),
               DropdownMenuItem(
                 value: "Completada",
-                child: Text("Completada"),
+                child: Text("COMPLETADA"),
               ),
             ],
             onChanged: (value) {
               setState(() {
-                filtro = value!;
+                filtro = value!; // ACTUALIZAR EL FILTRO
+                _loadTask(); // CARGAR LAS TAREAS SEGÚN EL FILTRO
               });
             },
             value: filtro,
@@ -121,47 +168,105 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
       ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: _titleController,
-                      decoration: InputDecoration(label: Text("Título")),
+              // FORMULARIO PARA AGREGAR NUEVAS TAREAS
+              Form(
+                key: _keyForm,
+                child: Row(
+                  children: [
+                    // CAMPO DE TEXTO PARA EL TÍTULO
+                    Expanded(
+                      child: TextFormField(
+                        controller: _titleController,
+                        decoration:
+                            const InputDecoration(label: Text("TÍTULO")),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "EL TÍTULO NO PUEDE ESTAR VACÍO";
+                          }
+                          return null;
+                        },
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: TextFormField(
-                      controller: _descriptionController,
-                      decoration:
-                      const InputDecoration(label: Text("Descripción")),
+                    const SizedBox(width: 10),
+                    // CAMPO DE TEXTO PARA LA DESCRIPCIÓN
+                    Expanded(
+                      child: TextFormField(
+                        controller: _descriptionController,
+                        decoration:
+                            const InputDecoration(label: Text("DESCRIPCIÓN")),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "LA DESCRIPCIÓN NO PUEDE ESTAR VACÍA";
+                          }
+                          return null;
+                        },
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.add),
-                    // ÍCONO PARA AÑADIR UNA NUEVA TAREA
-                    onPressed: () {
-                      if (_keyForm.currentState!.validate()) {
-
-                      }
-                    }, // LLAMAR A LA FUNCIÓN PARA AÑADIR TAREA
-                  ),
-                ],
+                    const SizedBox(width: 10),
+                    // BOTÓN PARA AÑADIR UNA NUEVA TAREA
+                    IconButton(
+                      icon: const Icon(Icons.add),
+                      onPressed: () {
+                        if (_keyForm.currentState!.validate()) {
+                          _addTask(_titleController.text,
+                              _descriptionController.text);
+                          _titleController.clear(); // LIMPIAR EL TÍTULO
+                          _descriptionController.clear(); // LIMPIAR DESCRIPCIÓN
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(height: 20),
+              // LISTA DE TAREAS
               Expanded(
                 child: ListView.builder(
-                  itemCount: _tasks.length, // CANTIDAD DE TAREAS EN LA LISTA
+                  itemCount: _tasks.length, // NÚMERO DE TAREAS
                   itemBuilder: (context, index) {
                     final task = _tasks[index]; // OBTENER CADA TAREA
-                    /*return ListTile(
-
-                    ),*/
+                    return ListTile(
+                      title: Text(
+                        task['title'],
+                        style: TextStyle(
+                          decoration: task['isCompleted'] == 1
+                              ? TextDecoration.lineThrough
+                              : TextDecoration
+                                  .none, // TACHAR SI ESTÁ COMPLETADA
+                        ),
+                      ),
+                      subtitle: Text(task['description']),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // DROPDOWN PARA CAMBIAR EL ESTADO
+                          DropdownButton<int>(
+                            items: const [
+                              DropdownMenuItem(
+                                  value: 0, child: Text("PENDIENTE")),
+                              DropdownMenuItem(
+                                  value: 1, child: Text("COMPLETADA")),
+                            ],
+                            onChanged: (value) {
+                              if (value != null) {
+                                _updateTaskStatus(task['id'], value);
+                              }
+                            },
+                            value: task['isCompleted'],
+                          ),
+                          // BOTÓN PARA ELIMINAR LA TAREA
+                          IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () {
+                              _deleteTask(task['id']);
+                            },
+                          ),
+                        ],
+                      ),
+                    );
                   },
                 ),
               ),
