@@ -66,6 +66,8 @@ class _PersonScreenState extends State<PersonScreen> {
 
   @override
   void initState() {
+    _addPerson("Jose", 20);
+    _addPerson("Pepe", 25);
     super.initState();
     _loadPerson(); // LLAMAR AL METODO PARA CARGAR LAS PERSONAS
   } // AL INICIAR LA APLICACION
@@ -80,8 +82,18 @@ class _PersonScreenState extends State<PersonScreen> {
   Future<void> _addPerson(String name, int age) async {
     // INSERTAR EN LA TABLA persons EL NOMBRE Y LA EDAD DE LA PERSONA
     await widget.database.insert('person', {'nombre': name, 'edad': age});
-    _loadPerson();
+    //_loadPerson();
   } // METODO PARA AÑADIR PERSONAS
+
+  Future<void> _deleteJose(String name) async {
+    await widget.database.delete('person',
+        where: 'nombre = ?', whereArgs: [name]); // ELIMINA POR NOMBRE
+  } // METODO PARA ELIMINAR A JOSE DE LA LISTA
+
+  Future<void> _modifyJose(String name, int edad) async {
+    await widget.database.update('person', {'edad': edad},
+        where: 'nombre = ?', whereArgs: [name]);
+  } // METODO PARA ACTUALIZAR LA EDAD DE JOSE
 
   @override
   Widget build(BuildContext context) {
@@ -105,11 +117,19 @@ class _PersonScreenState extends State<PersonScreen> {
                   })),
           ElevatedButton(
               onPressed: () {
-                _addPerson("Jose", 20);
-                _addPerson("Carmen", 25);
                 _loadPerson();
               },
-              child: Text("data"))
+              child: Text("READ")),
+          ElevatedButton(
+              onPressed: () {
+                _modifyJose("Jose", 33);
+              },
+              child: Text("MODIFY")),
+          ElevatedButton(
+              onPressed: () {
+                _deleteJose("Jose");
+              },
+              child: Text("DELETE")),
         ],
       )),
     );
