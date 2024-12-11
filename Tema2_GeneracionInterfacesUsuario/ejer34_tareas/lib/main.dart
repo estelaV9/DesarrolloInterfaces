@@ -85,54 +85,13 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
   TextEditingController(); // CONTROLADOR PARA EL CAMPO DE TEXTO
 
   @override
-  void initState() {
-    super.initState();
-    _loadTasks(); // CARGAR LAS TAREAS AL INICIAR
-  }
-
-  // FUNCION PARA CARGAR LAS TAREAS DESDE LA BASE DE DATOS
-  Future<void> _loadTasks() async {
-    final tasks = await widget.database.query('tasks'); // CONSULTA LAS TAREAS
-    setState(() {
-      _tasks = tasks; // ACTUALIZA EL ESTADO CON LAS TAREAS OBTENIDAS
-    });
-  }
-
-  // FUNCION PARA AÑADIR UNA NUEVA TAREA A LA BASE DE DATOS
-  Future<void> _addTask(String title, String description) async {
-    await widget.database.insert('tasks', {
-      'title': title,
-      'description': description,
-      'isCompleted': 0
-    }); // INSERTA LA TAREA
-    _titleController.clear(); // LIMPIA EL CAMPO DE TEXTO
-    _descriptionController.clear();
-    _loadTasks(); // VUELVE A CARGAR LAS TAREAS ACTUALIZADAS
-  }
-
-  // FUNCION PARA TOGGLEAR EL ESTADO DE UNA TAREA (COMPLETADA O NO)
-  Future<void> _toggleTask(int id, int isCompleted) async {
-    await widget.database.update(
-      'tasks',
-      {'isCompleted': isCompleted == 0 ? 1 : 0}, // CAMBIA EL ESTADO DE COMPLETADO
-      where: 'id = ?', // FILTRA POR EL ID DE LA TAREA
-      whereArgs: [id],
-    );
-    _loadTasks(); // VUELVE A CARGAR LAS TAREAS ACTUALIZADAS
-  }
-
-  // FUNCION PARA ELIMINAR UNA TAREA DE LA BASE DE DATOS
-  Future<void> _deleteTask(int id) async {
-    await widget.database.delete('tasks',
-        where: 'id = ?', whereArgs: [id]); // ELIMINA LA TAREA POR ID
-    _loadTasks(); // VUELVE A CARGAR LAS TAREAS ACTUALIZADAS
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme
+            .of(context)
+            .colorScheme
+            .inversePrimary,
         title: Text(widget.title),
         centerTitle: true,
         actions: [
@@ -173,22 +132,23 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
                       decoration: InputDecoration(label: Text("Título")),
                     ),
                   ),
-                  const SizedBox(width: 10), // Espaciado entre los campos
+                  const SizedBox(width: 10),
                   Expanded(
                     child: TextFormField(
                       controller: _descriptionController,
                       decoration:
-                          const InputDecoration(label: Text("Descripción")),
+                      const InputDecoration(label: Text("Descripción")),
                     ),
                   ),
                   const SizedBox(
                     width: 10,
                   ),
                   IconButton(
-                    icon: const Icon(Icons.add), // ÍCONO PARA AÑADIR UNA NUEVA TAREA
+                    icon: const Icon(Icons.add),
+                    // ÍCONO PARA AÑADIR UNA NUEVA TAREA
                     onPressed: () {
                       if (_keyForm.currentState!.validate()) {
-                        _addTask(_titleController.text, _descriptionController.text);
+
                       }
                     }, // LLAMAR A LA FUNCIÓN PARA AÑADIR TAREA
                   ),
@@ -199,34 +159,9 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
                   itemCount: _tasks.length, // CANTIDAD DE TAREAS EN LA LISTA
                   itemBuilder: (context, index) {
                     final task = _tasks[index]; // OBTENER CADA TAREA
-                    return ListTile(
-                      title: Text(
-                        task['title'], // MUESTRA EL TÍTULO DE LA TAREA
-                        style: TextStyle(
-                          decoration: task['isCompleted'] == 1
-                              ? TextDecoration
-                              .lineThrough // SI LA TAREA ESTA COMPLETADA, SE MUESTRA EN SUBRAYADO
-                              : TextDecoration.none,
-                        ),
-                      ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: Icon(task['isCompleted'] == 1
-                                ? Icons.check_box // ÍCONO DE TAREA COMPLETADA
-                                : Icons.check_box_outline_blank),
-                            // ÍCONO DE TAREA NO COMPLETADA
-                            onPressed: () => _toggleTask(task['id'],
-                                task['isCompleted']), // TOGGLE DEL ESTADO DE LA TAREA
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.delete), // ÍCONO DE ELIMINAR TAREA
-                            onPressed: () => _deleteTask(task['id']), // LLAMAR A LA FUNCION DE ELIMINAR TAREA
-                          ),
-                        ],
-                      ),
-                    );
+                    /*return ListTile(
+
+                    ),*/
                   },
                 ),
               ),
