@@ -16,7 +16,7 @@ Repositorio para los ejercicios del módulo de Desarrollo de Interfaces
 1. <a href="https://github.com/estelaV9/DesarrolloInterfaces/blob/master/Tema2_GeneracionInterfacesUsuario/ejercicios_dart/ejercicios_dart_tema2/bin/ejer1_listar_primos.dart">**Listar Primos**</a> hasta el número que el usuario introduzca por consola.
 2. <a href="https://github.com/estelaV9/DesarrolloInterfaces/blob/master/Tema2_GeneracionInterfacesUsuario/ejercicios_dart/ejercicios_dart_tema2/bin/ejer2_calculadora_basica.dart">**Calculadora**</a> básica.
 3. <a href="https://github.com/estelaV9/DesarrolloInterfaces/blob/master/Tema2_GeneracionInterfacesUsuario/ejercicios_dart/ejercicios_dart_tema2/bin/ejer3_map_sumar_edades.dart">**Map**</a> que contenga claves de nombres y edad de una persona, sumar las edades.
-4. <a href="">****</a>.
+4. <a href=""></a>.
 5. <a href="https://github.com/estelaV9/DesarrolloInterfaces/blob/master/Tema2_GeneracionInterfacesUsuario/ejercicios_dart/ejercicios_dart_tema2/bin/ejer5_peticion_api.dart">**Peticion GET**</a> a una API publica, manejar las respuestas.
 6. <a href="https://github.com/estelaV9/DesarrolloInterfaces/blob/master/Tema2_GeneracionInterfacesUsuario/ejercicios_dart/ejercicios_dart_tema2/bin/ejer6_cambios_archivo.dart">**Monitorear cambios**</a> en un archivo creando un script.
 7. <a href="https://github.com/estelaV9/DesarrolloInterfaces/blob/master/Tema2_GeneracionInterfacesUsuario/ejercicios_dart/ejercicios_dart_tema2/bin/ejer7_temporizador_decreciente.dart">**Temporizador decreciente**</a>.
@@ -37,9 +37,39 @@ Repositorio para los ejercicios del módulo de Desarrollo de Interfaces
 7. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer7_tarjeta_container">**Tarjeta**</a>.
 8. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer8_tarjetas">**Varias tarjetas**</a> que tengan un título y una imagen.
 9. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer9_interfaz_usuario">**Interfaz Perfil**</a>.
-10. <a href="">****</a>.
+10. <a href=""></a>.
 11. <a href="https://github.com/estelaV9/DesarrolloInterfaces/blob/master/Tema2_GeneracionInterfacesUsuario/ejer11_formulario/lib/main.dart">**Formulario de Registro**</a>.
+12. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer12_galeria_img">**Galeria Imágenes en un GridView**</a>.
+13. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer13_login_registro">**Pantalla de Bienvenida con un Login y Registro**</a>.
+14. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer14_form_boton">**Formulario con validación de envio**</a>.
+15. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer15_perfil_user">**Pantalla perfil con formulario**</a>.
+16. <a href=""></a>.
+17. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer17_cambiar_modo">**Cambiar entre modo claro y oscuro**</a>.
+18. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer18_tarea_checkbox">**Lista tarea implementando un Checkbox**</a>.
+19. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer19_barra_progreso">**Barra progreso con botón**</a>.
+20. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer20_nav_basica">**Navegación básica entre dos pantallas**</a>.
+21. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer21_producto">**Recibir un bojeto y navegar mostrando los detalles del objeto**</a>.
+22. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer22_nav_materialapp">**Navegación con rutas**</a>.
+23. <a href=""></a>.
+24. <a href=""></a>.
+25. <a href=""></a>.
+26. <a href=""></a>.
+27. <a href=""></a>.
+28. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer28_nav_inferior">**Navegación inferior**</a>.
+29. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer29_gestos">**Cuando se pulse la pantalla se cambia el color**</a>.
+30. <a href=""></a>.
+31. <a href=""></a>.
+32. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer32_contador_SPS">**Crear un contador con ScopedModel, Provider y SharedPreferences**</a>.
+33. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer33_gestion_tareas">**App para gestionar tareas usando Provider**</a>.
+34. <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer34_tareas">**Gestión de tareas con SQLite**</a>.
 
+### Ejemplos adicionales
+- <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejemplo_sqlite_task">**Ejemplo de SQLite**</a>.
+- <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer_sencillo_sqlite">**Ejercicio sencillo de SQLite**</a>.
+
+
+## Examen Primera Evaluación
+<a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Examen_1Evaluacion">Examen</a> de la primera evaluación. <a href="https://github.com/estelaV9/DesarrolloInterfaces/blob/master/Examen_1Evaluacion/Enunciado_Examen.md">Enunciado</a> del examen y <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Examen_1Evaluacion/examen_esteladevega">ejercicio</a> de Flutter.
 
 ---
 <div align="center">
