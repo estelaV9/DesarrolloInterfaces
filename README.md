@@ -71,9 +71,37 @@ Repositorio para los ejercicios del módulo de Desarrollo de Interfaces
 ## Examen Primera Evaluación
 <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Examen_1Evaluacion">Examen</a> de la primera evaluación. <a href="https://github.com/estelaV9/DesarrolloInterfaces/blob/master/Examen_1Evaluacion/Enunciado_Examen.md">Enunciado</a> del examen y <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Examen_1Evaluacion/examen_esteladevega">ejercicio</a> de Flutter.
 
+## Proyecto Flutter 2ª Evalucacion
+<table>
+    <tr>
+        <td width="30%">
+            <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/ProyectoFlutter_ParteTFG">
+                <img src="https://github.com/estelaV9/estelaV9/blob/main/Image/bannerCubeX.png" width="400" alt="CubeX_TFG">
+            </a>
+        </td>
+        <td>
+            <p>Realizar un proyecto personal con Flutter para la 2ª evaluación. Este proyecto tratará sobre una parte del <a href="https://github.com/estelaV9/TFG_CubeX">TFG</a>, que será un timer para diferentes cubos de rubik, con historial y estadísticas, entre otras funciones. <br>
+            <ul>
+                <li>
+                    <a href="https://github.com/estelaV9/DesarrolloInterfaces/blob/master/ProyectoFlutter_ParteTFG/EnunciadoPractica.md">Enunciado</a> del proyecto.
+                </li>
+                <li>
+                    <p>
+                        <a href="https://github.com/estelaV9/DesarrolloInterfaces/blob/master/ProyectoFlutter_ParteTFG/EstelaDeVega_WireframeCubeX.pdf">Esquema</a> (mockup o wireframe) de cómo estará diseñada la aplicación y una descripción de ella.
+                    </p>
+                </li>
+            </ul>
+            </p>
+        </td>
+    </tr>
+</table>
+
+
+
+
 ---
 <div align="center">
   <h2>¡Disfruta de los ejercicios del módulo!</h2>
 </div>
 
->_IES Ribera de Castilla 24/25._
+>_Estela de Vega | IES Ribera de Castilla 24/25._
