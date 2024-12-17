@@ -11,11 +11,29 @@ CREATE TABLE user (
   	imageUrl TEXT NOT NULL /** nota: por defecto tendra una imagen predeterminada **/
 );
 
+-- USUARIO PREDETERMINADO ADMIN
+INSERT INTO user (username, mail, passwordHash, creationDate, imageUrl)
+VALUES ('admin', 'admin@admin.com', 'admin', CURRENT_TIMESTAMP, 'imagen');
+
+
 DROP TABLE IF EXISTS cubeType;
 CREATE TABLE cubeType (
   idCubeType INTEGER PRIMARY KEY AUTOINCREMENT,
   cubeName TEXT NOT NULL UNIQUE -- EL NOMBRE DEL CUBO SERA UNICO
 );
+
+-- CUBOS PREDETERMINADOS
+INSERT INTO cubeType (cubeName) VALUES ('2x2x2');
+INSERT INTO cubeType (cubeName) VALUES ('3x3x3');
+INSERT INTO cubeType (cubeName) VALUES ('4x4x4');
+INSERT INTO cubeType (cubeName) VALUES ('5x5x5');
+INSERT INTO cubeType (cubeName) VALUES ('6x6x6');
+INSERT INTO cubeType (cubeName) VALUES ('7x7x7');
+INSERT INTO cubeType (cubeName) VALUES ('PYRAMINX');
+INSERT INTO cubeType (cubeName) VALUES ('SKEWB');
+INSERT INTO cubeType (cubeName) VALUES ('MEGAMINX');
+INSERT INTO cubeType (cubeName) VALUES ('SQUARE-1');
+
 
 DROP TABLE IF EXISTS sessionTime;
 CREATE TABLE sessionTime (
