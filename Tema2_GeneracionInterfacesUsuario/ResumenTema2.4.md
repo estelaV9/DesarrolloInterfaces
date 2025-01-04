@@ -172,9 +172,204 @@ class IncrementarButton extends StatelessWidget {
 
 
 ## Provider
+- Herramienta utilizada para gestionar estados globales e inyectar dependencias.
+- Está construida sobre `InheritedWidgets`.
+- Facilita el mantenimiento al separar la lógica de la interfaz.
+
+Incluye:
+1. **ChangeNotifier**: Clase para notificar cambios en el estado a los widgets.
+2. **ChangeNotifierProvider**: Proveedor de estado.
+3. **Consumer**: Widget para consumir datos del estado.
+
+### Provider con ChangeNotifier
+```dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ContadorProvider(),
+      child: ContadorApp(),
+    ),
+  );
+}
+
+class ContadorApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Ejemplo Provider')),
+        body: ContadorDisplay(),
+        floatingActionButton: IncrementarButton(),
+      ),
+    );
+  }
+}
+
+class ContadorDisplay extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final contador = context.watch<ContadorProvider>().contador;
+    return Center(
+      child: Text('Contador: $contador', style: TextStyle(fontSize: 24)),
+    );
+  }
+}
+
+class IncrementarButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        context.read<ContadorProvider>().incrementar();
+      },
+      child: Icon(Icons.add),
+    );
+  }
+}
+
+class ContadorProvider extends ChangeNotifier {
+  int _contador = 5;
+  int get contador => _contador;
+  void incrementar() {
+    _contador++;
+    notifyListeners();
+  }
+}
+```
+
+## SharedPreferences
+- Permite guardar datos simples como pares clave-valor de forma persistente.
+- Ideal para configuraciones, preferencias o datos ligeros.
+
+**Principales métodos:**
+- `setInt`, `setString`, `setBool`: Para almacenar valores.
+- `getInt`, `getString`, `getBool`: Para obtener valores guardados.
+- `remove`, `clear`: Para eliminar valores existentes.
+
 ### Ejemplo
+```dart
+import 'package:shared_preferences/shared_preferences.dart';
+
+void guardarDatos() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString('nombreUsuario', 'Juan');
+}
+
+void obtenerDatos() async {
+  final prefs = await SharedPreferences.getInstance();
+  String? nombre = prefs.getString('nombreUsuario');
+  print(nombre);
+}
+```
+
+## SQLite en Flutter
+- Base de datos ligera para almacenamiento persistente local.
+- Ideal para datos estructurados.
+- No requiere servidor.
+
+### Inicialización
+```dart
+void main() async {
+  sqfliteFfiInit();
+  final databaseFactory = databaseFactoryFfi;
+  final dbPath = join(await databaseFactory.getDatabasesPath(), 'my_database.db');
+  final db = await databaseFactory.openDatabase(dbPath);
+  print('Base de datos inicializada en: $dbPath');
+}
+```
+
+### Crear tablas
+```dart
+await db.execute('''
+  CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    age INTEGER NOT NULL
+  )
+''');
+print('Tabla creada: users');
+```
+
+### Operaciones CRUD
+- **Insertar datos:**
+```dart
+final userId = await db.insert('users', {
+  'name': 'John Doe',
+  'age': 30,
+});
+print('Usuario insertado con ID: $userId');
+```
+
+- **Consultar datos:**
+```dart
+final users = await db.query('users');
+for (var user in users) {
+  print('Usuario: ${user['name']}, Edad: ${user['age']}');
+}
+```
+
+- **Actualizar datos:**
+```dart
+await db.update(
+  'users',
+  {'age': 35},
+  where: 'name = ?',
+  whereArgs: ['John Doe'],
+);
+print('Edad actualizada para John Doe.');
+```
+
+- **Eliminar datos:**
+```dart
+await db.delete(
+  'users',
+  where: 'age > ?',
+  whereArgs: [30],
+);
+print('Usuarios mayores de 30 eliminados.');
+```
 
 
+## Actividades
+### 1. Programa con un contador
+Crea un  <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer32_contador_SPS">programa</a> que incluya un contador funcional usando **ScopedModel**, **Provider** y **SharedPreferences**.
+
+### 2. Gestión de tareas con Provider
+Crea una <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer33_gestion_tareas">aplicación</a> para gestionar tareas que incluya:
+1. **Pantalla principal**: Lista de tareas (inicialmente vacía).
+2. **Botón**: Agregar nuevas tareas mediante un formulario.
+3. **Gestión de estado**: Uso de `ChangeNotifier` para manejar la lista de tareas.
+
+**Detalles a implementar:**
+1. Modelo `TaskProvider` que extienda `ChangeNotifier`.
+2. Uso de `ChangeNotifierProvider` para gestionar el estado global.
+3. Dos widgets:
+   - `TaskList` (lista de tareas).
+   - `AddTaskScreen` (formulario para agregar tareas).
+
+### 3. Aplicación avanzada de tareas
+Crea una <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejer34_tareas">aplicación</a> que permita:
+1. Agregar tareas con título y descripción.
+2. Marcar tareas como completadas o pendientes (tachar si completadas).
+3. Filtrar tareas por estado.
+4. Eliminar tareas.
+
+**Detalles adicionales:**
+- **Agregar tareas:**
+  - Ingreso de título y descripción.
+  - Estado inicial: "Pendiente".
+- **Cambiar estado:**
+  - Dropdown para alternar entre "Pendiente" y "Completada".
+- **Filtro de estado:**
+  - Selector en AppBar para "Pendiente" o "Completada".
+- **Eliminar tareas:**
+  - Botón para eliminar tareas específicas.
+
+### Ejemplo SQLite 
+Un <a href="https://github.com/estelaV9/DesarrolloInterfaces/tree/master/Tema2_GeneracionInterfacesUsuario/ejemplo_sqlite_task">ejemplo</a> más sencillo para entender como funciona SQLite.
 
 
 
