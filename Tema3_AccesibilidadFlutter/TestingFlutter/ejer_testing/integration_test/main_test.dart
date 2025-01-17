@@ -10,8 +10,12 @@ void main() {
     app.main();
     await tester.pumpAndSettle();
     expect(find.text('0'), findsOneWidget); // VERIFICAR VALOR INICIAL
-    await tester.tap(find.byIcon(Icons.add)); // SIMULAR INTERACCION
+
+    for(int i = 0; i < 10; i++){
+      await tester.tap(find.byIcon(Icons.add)); // SIMULAR INTERACCION
+    }
+
     await tester.pumpAndSettle(); // VERIFICAR VALOR INCREMENTADO
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('10'), findsOneWidget);
   });
 }
