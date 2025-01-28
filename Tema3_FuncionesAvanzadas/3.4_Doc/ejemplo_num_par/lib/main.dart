@@ -1,3 +1,9 @@
+/// Ejemplo documentar número par.
+///
+/// Esta biblioteca contiene una aplicación Flutter que permite verificar
+/// si un número introducido por el usuario es par o impar.
+library ejemplo_num_par;
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,10 +23,10 @@ class Number extends StatefulWidget {
   const Number({super.key});
 
   @override
-  State<Number> createState() => _NumberState();
+  State<Number> createState() => NumberState();
 }
 
-class _NumberState extends State<Number> {
+class NumberState extends State<Number> {
   int? number; 
   final TextEditingController numberCtrll = TextEditingController();
   bool? esNumeroPar;
