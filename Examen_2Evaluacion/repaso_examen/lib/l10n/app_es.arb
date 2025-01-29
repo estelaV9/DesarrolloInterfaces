@@ -1,0 +1,13 @@
+{
+    "enterValue" : "Introduce el valor",
+    "converter" : "Conversor",
+    "kilometers": "Kilometros",
+    "meters": "Metros",
+    "writeYourName":"Millas",
+    "convertAndSave":"Convertir y Guardar",
+    "result":"Resultado",
+    "settings":"Ajustes",
+    "theme":"Tema Oscuro",
+    "language":"Idiomas",
+    "textSize":"Tamaño texto"
+}
