@@ -41,7 +41,7 @@ class _DrawerAppState extends State<DrawerApp> {
             ),
             // ACCION DE LA OPCION
             onTap: () {
-
+              Navigator.pushNamed(context, '/transactions');
             },
           ),
           ListTile(
